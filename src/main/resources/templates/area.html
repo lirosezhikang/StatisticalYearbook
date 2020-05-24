@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>统计年鉴</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+    <script src="js/jquery.min.js" type="application/javascript"></script>
+    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+</head>
+<body>
+<!--<div th:insert="~{navigetion :: nav}"></div>-->
+    <div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation"><a href="/">主页</a></li>
+                        <li role="presentation" class="active"><a href="/area">地区差异</a></li>
+                        <li role="presentation"><a href="#">年度变化</a></li>
+                        <li role="presentation"><a href="#">相关新闻</a></li>
+                        <li role="presentation"><a href="#">生活分享</a></li>
+                    </ul>
+                </div>
+
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown" th:if="${session.user!=null}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false">
+                                <span th:text="${session.user.getName()}"></span>
+                                <span class="caret"></span>
+                                <!--                            <span th:text="${session.user.getName()}"></span>-->
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/profile/questions">我的问题</a></li>
+                                <li><a href="#">个人资料</a></li>
+                                <li><a href="/logout">退出登录</a></li>
+                            </ul>
+                        </li>
+                        <li th:if="${session.user==null}">
+                            <a href="https://github.com/login/oauth/authorize?client_id=7508138ae2bb78dee041&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            数据类型 <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#">地区生产总值</a></li>
+            <li><a href="#">人口</a></li>
+            <li><a href="#">人均生产总值</a></li>
+            <li><a href="#">人均工资</a></li>
+            <li><a href="#">人均可支配收入</a></li>
+            <li><a href="#">人均消费支出</a></li>
+            <li><a href="#">失业率</a></li>
+        </ul>
+    </div>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            年份 <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#">2018</a></li>
+
+        </ul>
+    </div>
+</body>
+</html>
