@@ -1,13 +1,16 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-for="http://www.w3.org/1999/xhtml">
 <head>
     <title>统计年鉴</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/main.css">
 
-    <script src="js/jquery.min.js" type="application/javascript"></script>
-    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+    <script th:src="@{js/vue.js}" type="text/javascript"></script>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+
 </head>
 <body>
 <!--<div th:insert="~{navigetion :: nav}"></div>-->
@@ -50,29 +53,73 @@
         </nav>
     </div>
 
-    <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            数据类型 <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-            <li><a href="#">地区生产总值</a></li>
-            <li><a href="#">人口</a></li>
-            <li><a href="#">人均生产总值</a></li>
-            <li><a href="#">人均工资</a></li>
-            <li><a href="#">人均可支配收入</a></li>
-            <li><a href="#">人均消费支出</a></li>
-            <li><a href="#">失业率</a></li>
-        </ul>
+    <div class="panel panel-default" id="header">
+        <div class="panel-body">
+            <div class="dataDiv">
+                <label for="data">数据类型</label>
+                <select id="data">
+                    <option>{{datatype[0]}}</option>
+                    <option>{{datatype[1]}}</option>
+                    <option>{{datatype[2]}}</option>
+                    <option>{{datatype[3]}}</option>
+                    <option>{{datatype[4]}}</option>
+                    <option>{{datatype[5]}}</option>
+                    <option>{{datatype[6]}}</option>
+                    <option>{{datatype[7]}}</option>
+                </select>
+            </div>
+<!--            <div class="btn-group">-->
+<!--                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                    数据类型 <span class="caret"></span>-->
+<!--                </button>-->
+<!--                <ul class="dropdown-menu">-->
+<!--                    <li><a href="#">地区生产总值</a></li>-->
+<!--                    <li><a href="#">人口</a></li>-->
+<!--                    <li><a href="#">人均生产总值</a></li>-->
+<!--                    <li><a href="#">人均工资</a></li>-->
+<!--                    <li><a href="#">人均可支配收入</a></li>-->
+<!--                    <li><a href="#">人均消费支出</a></li>-->
+<!--                    <li><a href="#">失业率</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+
+            <div class="yearDiv">
+                <label for="year">年份</label>
+                <select id="year">
+                    <option v-for="(item,i) in yearSeries">{{item}}</option>
+                </select>
+            </div>
+
+            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                确定
+            </button>
+
+        </div>
     </div>
 
-    <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            年份 <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-            <li><a href="#">2018</a></li>
 
-        </ul>
-    </div>
 </body>
+
+<script type="text/javascript">
+    var vue_year=new Vue({
+        el:"#header",
+        data:{
+            datatype:["地区生产总值","人口","人均生产总值","人均工资","人均可支配收入","人均消费支出","高校数","教育经费"],
+            yearset:{
+                "地区生产总值":["2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"],
+                "人口":["2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"],
+                "人均生产总值":["2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"],
+                "人均工资":["2010","2011","2012","2013","2014","2015","2016","2017","2018"],
+                "人均可支配收入":["2013","2014","2015","2016","2017","2018","2019"],
+                "人均消费支出":["2010","2011","2012","2013","2014","2015","2016"],
+                "高校数":["2010","2011","2012","2013","2014","2015","2016","2017","2018"],
+                "教育经费":["2013","2014","2015","2016","2017"],
+            },
+            yearSeries:["2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"]
+        },
+        method:{
+
+        }
+    })
+</script>
 </html>
