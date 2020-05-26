@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:v-for="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-for="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <title>统计年鉴</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -10,7 +11,8 @@
     <script th:src="@{js/vue.js}" type="text/javascript"></script>
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
-
+    <script src="js/echarts.js" type="text/javascript"></script>
+    <script src="js/china.js" type="text/javascript"></script>
 </head>
 <body>
 <!--<div th:insert="~{navigetion :: nav}"></div>-->
@@ -57,54 +59,155 @@
         <div class="panel-body">
             <div class="dataDiv">
                 <label for="data">数据类型</label>
-                <select id="data">
-                    <option>{{datatype[0]}}</option>
-                    <option>{{datatype[1]}}</option>
-                    <option>{{datatype[2]}}</option>
-                    <option>{{datatype[3]}}</option>
-                    <option>{{datatype[4]}}</option>
-                    <option>{{datatype[5]}}</option>
-                    <option>{{datatype[6]}}</option>
-                    <option>{{datatype[7]}}</option>
+                <select id="data" v-model="dataSelected">
+                    <option v-for="(item,i) in datatype" v-bind:value="item.value">{{item.name}}</option>
                 </select>
             </div>
-<!--            <div class="btn-group">-->
-<!--                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                    数据类型 <span class="caret"></span>-->
-<!--                </button>-->
-<!--                <ul class="dropdown-menu">-->
-<!--                    <li><a href="#">地区生产总值</a></li>-->
-<!--                    <li><a href="#">人口</a></li>-->
-<!--                    <li><a href="#">人均生产总值</a></li>-->
-<!--                    <li><a href="#">人均工资</a></li>-->
-<!--                    <li><a href="#">人均可支配收入</a></li>-->
-<!--                    <li><a href="#">人均消费支出</a></li>-->
-<!--                    <li><a href="#">失业率</a></li>-->
-<!--                </ul>-->
-<!--            </div>-->
 
             <div class="yearDiv">
                 <label for="year">年份</label>
-                <select id="year">
-                    <option v-for="(item,i) in yearSeries">{{item}}</option>
+                <select id="year" v-model="yearSelected">
+                    <option v-for="(item,i) in yearSeries" v-bind:value="item.value">{{item.name}}</option>
                 </select>
             </div>
 
-            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" v-on:click="query()">
                 确定
             </button>
 
         </div>
     </div>
 
+<!--    <div>-->
+<!--        <input type="text" th:each="areaData : ${areaDataList}" th:value="${areaData.data}">-->
+<!--    </div>-->
 
+    <div id="map" style="height: 400px;width: 45%">
+
+    </div>
 </body>
 
-<script type="text/javascript">
-    var vue_year=new Vue({
+<script type="text/javascript" th:inline="javascript">
+
+    let maxValue=[[${maxValue.data}]];
+    let minValue=[[${minValue.data}]];
+    let title=[[${title}]];
+
+    let chart1=echarts.init(document.getElementById('map'));
+    let option={
+        title:{text:title,x:'center'},
+        tooltip:{
+            trigger:'item',
+            formatter:'{b}<br/>{c} (亿元)'
+        },
+        toolbox:{
+            show:true,
+            orient:'vertical',
+            left:'right',
+            top:'center',
+            feature:{
+                dataView: {},
+                restore:{},
+                saveAsImage: {}
+            }
+        },
+        visualMap:{
+            min:maxValue,
+            max:minValue,
+            text:['高','低'],
+            realtime: false,
+            calculable: true,
+            inRange: {
+                color: ['lightskyblue', 'yellow', 'orangered']
+            }
+        },
+        series:[
+            {
+                name:title,
+                type:'map',
+                map:'china',
+                roam:false,
+                label: {
+                    show: true
+                },
+                data:[],
+                nameMap:{
+                    '西藏':'西藏自治区',
+                    '青海':'青海省',
+                    '宁夏':'宁夏回族自治区',
+                    '海南':'海南省',
+                    '甘肃':'甘肃省',
+                    '贵州':'贵州省',
+                    '新疆':'新疆维吾尔自治区',
+                    '云南':'云南省',
+                    '重庆':'重庆市',
+                    '吉林':'吉林省',
+                    '山西':'山西省',
+                    '天津':'天津市',
+                    '江西':'江西省',
+                    '广西':'广西壮族自治区',
+                    '陕西':'陕西省',
+                    '黑龙江':'黑龙江省',
+                    '内蒙古':'内蒙古自治区',
+                    '安徽':'安徽省',
+                    '北京':'北京市',
+                    '福建':'福建省',
+                    '上海':'上海市',
+                    '湖北':'湖北省',
+                    '湖南':'湖南省',
+                    '四川':'四川省',
+                    '辽宁':'辽宁省',
+                    '河北':'河北省',
+                    '河南':'河南省',
+                    '浙江':'浙江省',
+                    '山东':'山东省',
+                    '江苏':'江苏省',
+                    '广东':'广东省'
+                }
+            }
+        ]
+    }
+    chart1.setOption(option);
+
+    let dataSelected=[[${dataSelected}]];
+    let yearSelected=[[${yearSelected}]];
+
+    $.ajax({
+        type: "GET",
+        url:"/getData",
+        data:"dataSelected="+dataSelected+"&yearSelected="+yearSelected,
+        datatype: "json",
+        success:function (result) {
+            if(result){
+                chart1.setOption({
+                    series:[{
+                        data:result
+                    }]
+                });
+            }
+            console.log(result);
+        }
+    });
+
+
+</script>
+
+<script>
+    let vue_year=new Vue({
         el:"#header",
         data:{
-            datatype:["地区生产总值","人口","人均生产总值","人均工资","人均可支配收入","人均消费支出","高校数","教育经费"],
+            dataSelected:"",
+            yearSelected:"",
+            datatype:[
+                {name:"地区生产总值",value:"total_value"},
+                {name:"人口",value:"population"},
+                {name:"人均生产总值",value:"per_value"},
+                {name:"人均工资",value:"salary"},
+                {name:"人均可支配收入",value:"dis_income"},
+                {name:"人均消费支出",value:"consumption"},
+                {name:"高校数",value:"total_school"},
+                {name:"教育经费",value:"edu_fee"}
+                ],
             yearset:{
                 "地区生产总值":["2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"],
                 "人口":["2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"],
@@ -115,7 +218,22 @@
                 "高校数":["2010","2011","2012","2013","2014","2015","2016","2017","2018"],
                 "教育经费":["2013","2014","2015","2016","2017"],
             },
-            yearSeries:["2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"]
+            yearSeries:[
+                {name:"2010",value:"y2010"},
+                {name:"2011",value:"y2011"},
+                {name:"2012",value:"y2012"},
+                {name:"2013",value:"y2013"},
+                {name:"2014",value:"y2014"},
+                {name:"2015",value:"y2015"},
+                {name:"2016",value:"y2016"},
+                {name:"2017",value:"y2017"},
+                {name:"2018",value:"y2018"},
+                {name:"2019",value:"y2019"}
+            ],
+        },
+        created(){
+            this.yearSelected=this.yearSeries[this.yearSeries.length-1].value;
+            this.dataSelected=this.datatype[0].value;
         },
         method:{
 

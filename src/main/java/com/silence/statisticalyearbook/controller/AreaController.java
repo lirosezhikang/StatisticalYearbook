@@ -1,12 +1,45 @@
 package com.silence.statisticalyearbook.controller;
 
+import com.silence.statisticalyearbook.dao.AreaData;
+import com.silence.statisticalyearbook.mapper.AreaMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.HashMap;
 
 @Controller
 public class AreaController {
+
+    @Autowired
+    AreaMapper areaMapper;
+
     @GetMapping("/area")
-    public String Area(){
+    public String Area(@RequestParam(name = "dataSelected",defaultValue = "total_value") String dataSelected,
+                       @RequestParam(name = "yearSelected",defaultValue = "y2019") String yearSelected,
+                       Model model){
+        AreaData maxAreaData =areaMapper.maxQuery(dataSelected, yearSelected);
+        AreaData minAreaData =areaMapper.minQuery(dataSelected, yearSelected);
+
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("total_value","国民生产总值");
+        map.put("population","人口");
+        map.put("per_value","人均生产总值");
+        map.put("salary","人均工资");
+        map.put("dis_income","人均可支配收入");
+        map.put("consumption","人均消费支出");
+        map.put("total_school","高校数");
+        map.put("edu_fee","教育经费");
+
+        String title=map.get(dataSelected);
+
+        model.addAttribute("dataSelected",dataSelected);
+        model.addAttribute("yearSelected",yearSelected);
+        model.addAttribute("maxValue", maxAreaData);
+        model.addAttribute("minValue",minAreaData);
+        model.addAttribute("title",title);
         return "area";
     }
 }
