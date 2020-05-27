@@ -35,11 +35,23 @@ public class AreaController {
 
         String title=map.get(dataSelected);
 
+        HashMap<String, String> map2 = new HashMap<String, String>();
+        map2.put("total_value","(亿元)");
+        map2.put("population","(万人)");
+        map2.put("per_value","(元)");
+        map2.put("salary","(元)");
+        map2.put("dis_income","(元)");
+        map2.put("consumption","(元)");
+        map2.put("total_school","(所)");
+        map2.put("edu_fee","(万元)");
+        String unit=map2.get(dataSelected);
+
         model.addAttribute("dataSelected",dataSelected);
         model.addAttribute("yearSelected",yearSelected);
         model.addAttribute("maxValue", maxAreaData);
         model.addAttribute("minValue",minAreaData);
         model.addAttribute("title",title);
+        model.addAttribute("unit",unit);
         return "area";
     }
 }
