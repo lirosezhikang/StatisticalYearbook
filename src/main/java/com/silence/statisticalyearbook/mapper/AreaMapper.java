@@ -28,4 +28,11 @@ public interface AreaMapper {
             @Result(property = "data",column = "year")
     })
     AreaData minQuery(@Param("dataSelected") String dataSelected, @Param("yearSelected") String yearSelected);
+
+    @Select("select area,${yearSelected} as year from ${dataSelected} order by ${yearSelected} desc limit 10")
+    @Results({
+            @Result(property = "areaName",column = "area"),
+            @Result(property = "data",column = "year")
+    })
+    List<AreaData> areaQueryTop(String dataSelected, String yearSelected);
 }

@@ -17,13 +17,23 @@
     <style>
         .map{
             float: left;
-            height: 400px;
-            width: 42%;
+            height: 500px;
+            width: 44%;
         }
         .bar{
             float: right;
-            height: 400px;
-            width: 42%;
+            height: 500px;
+            width: 44%;
+        }
+        .bar_top{
+            float: left;
+            height: 500px;
+            width: 44%;
+        }
+        .pie_top{
+            float: right;
+            height: 500px;
+            width: 44%;
         }
     </style>
 </head>
@@ -95,6 +105,8 @@
 
     <div id="map" class="map"></div>
     <div id="bar" class="bar"></div>
+    <div id="bar_top" class="bar_top"></div>
+    <div id="pie_top" class="pie_top"></div>
 </body>
 
 <script type="text/javascript" th:inline="javascript">
@@ -105,7 +117,7 @@
     let unit=[[${unit}]]
 
     let chart1=echarts.init(document.getElementById('map'));
-    let option={
+    let option1={
         title:{text:title,x:'center'},
         tooltip:{
             trigger:'item',
@@ -178,7 +190,128 @@
             }
         ]
     }
-    chart1.setOption(option);
+    chart1.setOption(option1);
+
+    let chart2=echarts.init(document.getElementById('bar'));
+    let option2={
+        title:{text:title,x:'center'},
+        tooltip:{
+            trigger:'item',
+            formatter:'{b}<br/>{c}'+unit
+        },
+        grid:{
+            bottom:'30%'
+        },
+        toolbox:{
+            show:true,
+            orient:'vertical',
+            left:'right',
+            top:'center',
+            feature:{
+                dataView: {},
+                restore:{},
+                saveAsImage: {},
+                magicType: {
+                    type:['line','bar']
+                }
+            }
+        },
+        xAxis: {
+            type: 'category',
+            axisLabel:{
+                interval:0,
+                formatter: function (value) {
+                    return value.split("").join("\n");
+                }
+            }
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [],
+            type: 'bar',
+            showBackground: true,
+            backgroundStyle: {
+                color: 'rgba(220, 220, 220, 0.8)'
+            }
+        }]
+    };
+    chart2.setOption(option2);
+
+    let chart3=echarts.init(document.getElementById('bar_top'));
+    let option3={
+        title:{text:title,x:'center',subtext: 'TOP 10'},
+        tooltip:{
+            trigger:'item',
+            formatter:'{b}<br/>{c}'+unit
+        },
+        grid:{
+            left:'15%'
+        },
+        toolbox:{
+            show:true,
+            orient:'vertical',
+            left:'right',
+            top:'center',
+            feature:{
+                dataView: {},
+                restore:{},
+                saveAsImage: {},
+                magicType: {
+                    type:['line','bar']
+                }
+            }
+        },
+        yAxis: {
+            type: 'category',
+            axisLabel:{
+                interval:0,
+            }
+        },
+        xAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [],
+            type: 'bar',
+            showBackground: true,
+            backgroundStyle: {
+                color: 'rgba(220, 220, 220, 0.8)'
+            }
+        }]
+    };
+    chart3.setOption(option3);
+
+    let chart4=echarts.init(document.getElementById('pie_top'));
+    let option4={
+        title:{text:title,x:'center',subtext: 'TOP 10'},
+        tooltip:{
+            trigger:'item',
+            formatter:'{b}<br/>{c}'+unit
+        },
+        legend: {
+            // orient: 'vertical',
+            // top: 'middle',
+            bottom: 10,
+            left: 'center',
+            data: []
+        },
+        series: [{
+            type: 'pie',
+            center:['50%','50%'],
+            selectedMode:'single',
+            data:[]
+        }],
+        emphasis: {
+            itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+        }
+    };
+    chart4.setOption(option4);
 
     let dataSelected=[[${dataSelected}]];
     let yearSelected=[[${yearSelected}]];
@@ -190,13 +323,62 @@
         datatype: "json",
         success:function (result) {
             if(result){
+                let name1=[];
+                for(let i=0;i<result.length;i++){
+                    name1[i]=result[i].name;
+                }
                 chart1.setOption({
                     series:[{
                         data:result
                     }]
                 });
+                chart2.setOption({
+                    xAxis:{
+                        data:name1
+                    },
+                    series:[{
+                        type:'bar',
+                        data:result
+                    }]
+                });
+                console.log(name1);
+                console.log(result);
             }
-            console.log(result);
+
+        }
+    });
+
+    $.ajax({
+        type: "GET",
+        url:"/getDataTop",
+        data:"dataSelected="+dataSelected+"&yearSelected="+yearSelected,
+        datatype: "json",
+        success:function (result) {
+            if(result){
+                let name1=[];
+                for(let i=0;i<result.length;i++){
+                    name1[i]=result[i].name;
+                }
+                chart3.setOption({
+                    yAxis:{
+                        data:name1
+                    },
+                    series:[{
+                        type:'bar',
+                        data:result
+                    }]
+                });
+                chart4.setOption({
+                    legend:{
+                        data:name1
+                    },
+                    series:[{
+                        data:result
+                    }]
+                })
+                console.log(result);
+            }
+
         }
     });
 
