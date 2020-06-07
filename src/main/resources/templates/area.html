@@ -18,35 +18,45 @@
         .map{
             float: left;
             height: 500px;
-            width: 44%;
+            width: 45%;
+            background-color: white;
+            margin: 32px;
         }
         .bar{
             float: right;
             height: 500px;
-            width: 44%;
+            width: 45%;
+            background-color: white;
+            margin: 32px;
         }
         .bar_top{
             float: left;
             height: 500px;
-            width: 44%;
+            width: 45%;
+            background-color: white;
+            margin: 32px;
         }
         .pie_top{
             float: right;
             height: 500px;
-            width: 44%;
+            width: 45%;
+            background-color: white;
+            margin: 32px;
+        }
+        body{
+            background-color: #eee;
         }
     </style>
 </head>
 <body>
-<!--<div th:insert="~{navigetion :: nav}"></div>-->
-    <div>
+    <div class="all">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <ul class="nav nav-tabs">
                         <li role="presentation"><a href="/">主页</a></li>
                         <li role="presentation" class="active"><a href="/area">地区差异</a></li>
-                        <li role="presentation"><a href="#">年度变化</a></li>
+                        <li role="presentation"><a href="/year">年度变化</a></li>
                         <li role="presentation"><a href="#">相关新闻</a></li>
                         <li role="presentation"><a href="#">生活分享</a></li>
                     </ul>
@@ -94,7 +104,7 @@
                 </select>
             </div>
 
-            <a v-bind:href="'http://localhost:8888/area?dataSelected='+dataSelected+'&yearSelected='+yearSelected">确定</a>
+            <button onclick="submit()">确定</button>
 
         </div>
     </div>
@@ -189,7 +199,7 @@
                 }
             }
         ]
-    }
+    };
     chart1.setOption(option1);
 
     let chart2=echarts.init(document.getElementById('bar'));
@@ -382,6 +392,77 @@
         }
     });
 
+    function submit() {
+        let dataSelected=vue_year.$data.dataSelected;
+        let yearSelected=vue_year.$data.yearSelected;
+
+        $.ajax({
+            type: "GET",
+            url:"/getData",
+            data:"dataSelected="+dataSelected+"&yearSelected="+yearSelected,
+            datatype: "json",
+            success:function (result) {
+                if(result){
+                    let name1=[];
+                    for(let i=0;i<result.length;i++){
+                        name1[i]=result[i].name;
+                    }
+                    chart1.setOption({
+                        series:[{
+                            data:result
+                        }]
+                    });
+                    chart2.setOption({
+                        xAxis:{
+                            data:name1
+                        },
+                        series:[{
+                            type:'bar',
+                            data:result
+                        }]
+                    });
+                    console.log(name1);
+                    console.log(result);
+                }
+
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url:"/getDataTop",
+            data:"dataSelected="+dataSelected+"&yearSelected="+yearSelected,
+            datatype: "json",
+            success:function (result) {
+                if(result){
+                    let name1=[];
+                    for(let i=0;i<result.length;i++){
+                        name1[i]=result[i].name;
+                    }
+                    chart3.setOption({
+                        yAxis:{
+                            data:name1
+                        },
+                        series:[{
+                            type:'bar',
+                            data:result
+                        }]
+                    });
+                    chart4.setOption({
+                        legend:{
+                            data:name1
+                        },
+                        series:[{
+                            data:result
+                        }]
+                    })
+                    console.log(result);
+                }
+
+            }
+        });
+    }
+
 
 </script>
 
@@ -429,16 +510,6 @@
             this.dataSelected=this.datatype[0].value;
         },
         methods:{
-            submit:function () {
-                let dataSelected=this.dataSelected;
-                let yearSelected=this.yearSelected;
-                $.ajax({
-                    type: "GET",
-                    url:"/area",
-                    data:"dataSelected="+dataSelected+"&yearSelected="+yearSelected,
-                    datatype: "json"
-                });
-            }
         }
     })
 </script>

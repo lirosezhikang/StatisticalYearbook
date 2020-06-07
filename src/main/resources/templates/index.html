@@ -1,24 +1,62 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-for="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <title>统计年鉴</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/area.css">
 
-    <script src="js/jquery.min.js" type="application/javascript"></script>
-    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+    <script th:src="@{js/vue.js}" type="text/javascript"></script>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/echarts.js" type="text/javascript"></script>
+    <script src="js/china.js" type="text/javascript"></script>
+
+    <style>
+        .areaDiv{
+            float: left;
+        }
+        .map{
+            float: left;
+            height: 500px;
+            width: 45%;
+            background-color: white;
+            margin: 32px;
+        }
+        .tableDiv{
+            float: right;
+            height: 500px;
+            width: 45%;
+            background-color: white;
+            margin: 32px;
+        }
+        #header3{
+            width: 100%;
+            float: left;
+        }
+        .radio2{
+            float: left;
+            height: 500px;
+            width: 45%;
+            background-color: white;
+            margin: 32px;
+        }
+        body{
+            background-color: #eee;
+        }
+    </style>
 </head>
 <body>
-<!--<div th:insert="~{navigetion :: nav}"></div>-->
-    <div>
+    <div class="all">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <ul class="nav nav-tabs">
                         <li role="presentation" class="active"><a href="/">主页</a></li>
                         <li role="presentation"><a href="/area">地区差异</a></li>
-                        <li role="presentation"><a href="#">年度变化</a></li>
+                        <li role="presentation"><a href="/year">年度变化</a></li>
                         <li role="presentation"><a href="#">相关新闻</a></li>
                         <li role="presentation"><a href="#">生活分享</a></li>
                     </ul>
@@ -50,5 +88,499 @@
         </nav>
     </div>
 
+
+    <div class="panel panel-default" id="header2">
+        <div class="panel-body">
+            <div class="areaDiv">
+                <label for="area2">地区</label>
+                <select id="area2" v-model="areaSelected">
+                    <option v-for="(item,i) in areaType" v-bind:value="item.value">{{item.name}}</option>
+                </select>
+            </div>
+
+            <div class="dataDiv">
+                <label for="year2">年份</label>
+                <select id="year2" v-model="yearSelected">
+                    <option v-for="(item,i) in yearSeries" v-bind:value="item.value">{{item.name}}</option>
+                </select>
+            </div>
+
+            <button onclick="submit2()">确定</button>
+
+        </div>
+    </div>
+
+    <div id="map" class="map"></div>
+    <div id="tableDiv1" class="tableDiv">
+        <table class="table table-bordered table-hover" id="table1">
+
+        </table>
+    </div>
+
+    <div class="panel panel-default" id="header3">
+        <div class="panel-body">
+            <div class="areaDiv">
+                <label for="area3">地区</label>
+                <select id="area3" v-model="areaSelected1">
+                    <option v-for="(item,i) in areaType" v-bind:value="item.value">{{item.name}}</option>
+                </select>
+            </div>
+
+            <div class="areaDiv">
+                <label for="area33">地区</label>
+                <select id="area33" v-model="areaSelected2">
+                    <option v-for="(item,i) in areaType" v-bind:value="item.value">{{item.name}}</option>
+                </select>
+            </div>
+
+            <div class="dataDiv">
+                <label for="year3">年份</label>
+                <select id="year3" v-model="yearSelected">
+                    <option v-for="(item,i) in yearSeries" v-bind:value="item.value">{{item.name}}</option>
+                </select>
+            </div>
+
+            <button onclick="submit3()">比较</button>
+
+        </div>
+    </div>
+
+    <div id="radio2" class="radio2"></div>
+    <div id="tableDiv2" class="tableDiv">
+        <table class="table table-bordered table-hover" id="table2">
+
+        </table>
+    </div>
 </body>
+
+<!--<script>-->
+<!--    let vue1=new Vue({-->
+<!--        el:"#header1",-->
+<!--        data:{-->
+<!--            areaSelected:"",-->
+<!--            areaType:[-->
+<!--                {name:'西藏',value:'xizang'},-->
+<!--                {name:'青海',value:'qinhai'},-->
+<!--                {name:'宁夏',value:'ningxia'},-->
+<!--                {name:'海南',value:'hainan'},-->
+<!--                {name:'甘肃',value:'gansu'},-->
+<!--                {name:'贵州',value:'guizhou'},-->
+<!--                {name:'新疆',value:'xinjiang'},-->
+<!--                {name:'云南',value:'yunnan'},-->
+<!--                {name:'重庆',value:'chongqin'},-->
+<!--                {name:'吉林',value:'jilin'},-->
+<!--                {name:'山西',value:'shanxi'},-->
+<!--                {name:'天津',value:'tianjing'},-->
+<!--                {name:'江西',value:'jiangxi'},-->
+<!--                {name:'广西',value:'guangxi'},-->
+<!--                {name:'陕西',value:'shaanxi'},-->
+<!--                {name:'黑龙江',value:'heilongjiang'},-->
+<!--                {name:'内蒙古',value:'neimeng'},-->
+<!--                {name:'安徽',value:'anhui'},-->
+<!--                {name:'北京',value:'beijing'},-->
+<!--                {name:'福建',value:'fujian'},-->
+<!--                {name:'上海',value:'shanghai'},-->
+<!--                {name:'湖北',value:'hubei'},-->
+<!--                {name:'湖南',value:'hainan'},-->
+<!--                {name:'四川',value:'sichuan'},-->
+<!--                {name:'辽宁',value:'liaoning'},-->
+<!--                {name:'河北',value:'hebei'},-->
+<!--                {name:'河南',value:'henan'},-->
+<!--                {name:'浙江',value:'zhejiang'},-->
+<!--                {name:'山东',value:'shandong'},-->
+<!--                {name:'江苏',value:'jiangsu'},-->
+<!--                {name:'广东',value:'guangdong'}-->
+<!--            ],-->
+<!--        },-->
+<!--        created(){-->
+<!--            this.areaSelected=this.areaType[21].value;-->
+<!--        },-->
+<!--        methods:{-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+
+<script>
+    let vue2=new Vue({
+        el:"#header2",
+        data:{
+            areaSelected:"",
+            yearSelected:"",
+            areaType:[
+                {name:'西藏',value:'西藏自治区'},
+                {name:'青海',value:'青海省'},
+                {name:'宁夏',value:'宁夏回族自治区'},
+                {name:'海南',value:'海南省'},
+                {name:'甘肃',value:'甘肃省'},
+                {name:'贵州',value:'贵州省'},
+                {name:'新疆',value:'新疆维吾尔自治区'},
+                {name:'云南',value:'云南省'},
+                {name:'重庆',value:'重庆市'},
+                {name:'吉林',value:'吉林省'},
+                {name:'山西',value:'山西省'},
+                {name:'天津',value:'天津市'},
+                {name:'江西',value:'江西省'},
+                {name:'广西',value:'广西壮族自治区'},
+                {name:'陕西',value:'陕西省'},
+                {name:'黑龙江',value:'黑龙江省'},
+                {name:'内蒙古',value:'内蒙古自治区'},
+                {name:'安徽',value:'安徽省'},
+                {name:'北京',value:'北京市'},
+                {name:'福建',value:'福建省'},
+                {name:'上海',value:'上海市'},
+                {name:'湖北',value:'湖北省'},
+                {name:'湖南',value:'湖南省'},
+                {name:'四川',value:'四川省'},
+                {name:'辽宁',value:'辽宁省'},
+                {name:'河北',value:'河北省'},
+                {name:'河南',value:'河南省'},
+                {name:'浙江',value:'浙江省'},
+                {name:'山东',value:'山东省'},
+                {name:'江苏',value:'江苏省'},
+                {name:'广东',value:'广东省'}
+            ],
+            yearSeries:[
+                {name:"2010",value:"y2010"},
+                {name:"2011",value:"y2011"},
+                {name:"2012",value:"y2012"},
+                {name:"2013",value:"y2013"},
+                {name:"2014",value:"y2014"},
+                {name:"2015",value:"y2015"},
+                {name:"2016",value:"y2016"},
+                {name:"2017",value:"y2017"},
+                {name:"2018",value:"y2018"},
+                {name:"2019",value:"y2019"}
+            ],
+        },
+        created(){
+            this.yearSelected=this.yearSeries[this.yearSeries.length-1].value;
+            this.areaSelected=this.areaType[21].value;
+        },
+        methods:{
+        }
+    })
+
+</script>
+
+<script>
+    let vue3=new Vue({
+        el:"#header3",
+        data:{
+            areaSelected1:"",
+            areaSelected2:"",
+            yearSelected:"",
+            areaType:[
+                {name:'西藏',value:'西藏自治区'},
+                {name:'青海',value:'青海省'},
+                {name:'宁夏',value:'宁夏回族自治区'},
+                {name:'海南',value:'海南省'},
+                {name:'甘肃',value:'甘肃省'},
+                {name:'贵州',value:'贵州省'},
+                {name:'新疆',value:'新疆维吾尔自治区'},
+                {name:'云南',value:'云南省'},
+                {name:'重庆',value:'重庆市'},
+                {name:'吉林',value:'吉林省'},
+                {name:'山西',value:'山西省'},
+                {name:'天津',value:'天津市'},
+                {name:'江西',value:'江西省'},
+                {name:'广西',value:'广西壮族自治区'},
+                {name:'陕西',value:'陕西省'},
+                {name:'黑龙江',value:'黑龙江省'},
+                {name:'内蒙古',value:'内蒙古自治区'},
+                {name:'安徽',value:'安徽省'},
+                {name:'北京',value:'北京市'},
+                {name:'福建',value:'福建省'},
+                {name:'上海',value:'上海市'},
+                {name:'湖北',value:'湖北省'},
+                {name:'湖南',value:'湖南省'},
+                {name:'四川',value:'四川省'},
+                {name:'辽宁',value:'辽宁省'},
+                {name:'河北',value:'河北省'},
+                {name:'河南',value:'河南省'},
+                {name:'浙江',value:'浙江省'},
+                {name:'山东',value:'山东省'},
+                {name:'江苏',value:'江苏省'},
+                {name:'广东',value:'广东省'}
+            ],
+            yearSeries:[
+                {name:"2010",value:"y2010"},
+                {name:"2011",value:"y2011"},
+                {name:"2012",value:"y2012"},
+                {name:"2013",value:"y2013"},
+                {name:"2014",value:"y2014"},
+                {name:"2015",value:"y2015"},
+                {name:"2016",value:"y2016"},
+                {name:"2017",value:"y2017"},
+                {name:"2018",value:"y2018"},
+                {name:"2019",value:"y2019"}
+            ],
+        },
+        created(){
+            this.yearSelected=this.yearSeries[this.yearSeries.length-1].value;
+            this.areaSelected1=this.areaType[21].value;
+            this.areaSelected2=this.areaType[30].value;
+
+        },
+        methods:{
+        }
+    })
+
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+    let values=[[${values}]];
+    let indicatorValues=[[${indicatorValues}]];
+
+    let chart1=echarts.init(document.getElementById('map'));
+    let option1={
+        title: {
+            text: '湖北'+'2019年'
+        },
+        tooltip: {},
+        legend: {
+            data: "湖北省"
+        },
+        radar: {
+            // shape: 'circle',
+            name: {
+                textStyle: {
+                    color: '#fff',
+                    backgroundColor: '#999',
+                    borderRadius: 3,
+                    padding: [3, 5]
+                }
+            },
+            indicator: indicatorValues
+        },
+        series: [{
+            type: 'radar',
+            // areaStyle: {normal: {}},
+            data: [
+                {
+                    value: values,
+                    name: '湖北省'
+                }
+            ]
+        }]
+    };
+    chart1.setOption(option1);
+
+    function submit2() {
+        let areaSelected=vue2.$data.areaSelected;
+        let yearSelected=vue2.$data.yearSelected;
+        $.ajax({
+            type: "GET",
+            url:"/getDataIndex",
+            data:"yearSelected="+yearSelected+"&areaSelected="+areaSelected,
+            datatype: "json",
+            success:function (result) {
+                if(result){
+                    chart1.setOption({
+                        title: {
+                            text: result[2]
+                        },
+                        legend: {
+                            data: result[2]
+                        },
+                        radar: {
+                            indicator: result[1]
+                        },
+                        series: [{
+                            data: [
+                                {
+                                    value: result[0],
+                                    name: result[2]
+                                }
+                            ]
+                        }]
+                    });
+                    $(function () {
+                        $("#table1").empty();
+                        let html="";
+                        html+="<thead>";
+                        html+=      "<tr>";
+                        html+=          "<td>"+"指标"+"</td>";
+                        html+=          "<td>"+result[2]+"</td>";
+                        html+=          "<td>"+"最大"+"</td>";
+                        html+=      "</tr>";
+                        html+="</thead>";
+                        html+="<tbody>";
+                        for(let i=0;i<result[0].length;i++){
+                            html+="<tr>";
+                            html+=    "<td>"+result[1][i].name+"</td>";
+                            html+=    "<td>"+result[0][i]+"</td>";
+                            html+=    "<td>"+result[1][i].max+"</td>";
+                            html+="</tr>";
+                        }
+                        html+="</tbody>";
+                        $("#table1").html(html);
+
+                    });
+
+                    console.log(result);
+                }
+
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+
+    let values1=[[${values1}]];
+
+    let chart2=echarts.init(document.getElementById('radio2'));
+    let option2={
+        title: {
+            text: '湖北'+'VS'+'广东'
+        },
+        tooltip: {},
+        legend: {
+            data: ['湖北省','广东省']
+        },
+        radar: {
+            // shape: 'circle',
+            name: {
+                textStyle: {
+                    color: '#fff',
+                    backgroundColor: '#999',
+                    borderRadius: 3,
+                    padding: [3, 5]
+                }
+            },
+            indicator: indicatorValues
+        },
+        series: [{
+            type: 'radar',
+            // areaStyle: {normal: {}},
+            data: [
+                {
+                    value: values,
+                    name: '湖北省'
+                },
+                {
+                    value: values1,
+                    name: '广东省'
+                }
+            ]
+        }]
+    };
+    chart2.setOption(option2);
+
+    function submit3() {
+        let areaSelected1=vue3.$data.areaSelected1;
+        let areaSelected2=vue3.$data.areaSelected2;
+
+        let yearSelected=vue3.$data.yearSelected;
+        $.ajax({
+            type: "GET",
+            url:"/getDataIndex3",
+            data:"yearSelected="+yearSelected+"&areaSelected1="+areaSelected1+"&areaSelected2="+areaSelected2,
+            datatype: "json",
+            success:function (result) {
+                if(result){
+                    chart2.setOption({
+                        title: {
+                            text: result[3][0]+'VS'+result[3][1]
+                        },
+                        legend: {
+                            data: result[3]
+                        },
+                        radar: {
+                            indicator: result[2]
+                        },
+                        series: [{
+                            data: [
+                                {
+                                    value: result[0],
+                                    name: result[3][0]
+                                },
+                                {
+                                    value: result[1],
+                                    name: result[3][1]
+                                }
+                            ]
+                        }]
+                    });
+                    $(function () {
+                        $("#table2").empty();
+                        let html="";
+                        html+="<thead>";
+                        html+=      "<tr>";
+                        html+=          "<td>"+"指标"+"</td>";
+                        html+=          "<td>"+result[3][0]+"</td>";
+                        html+=          "<td>"+result[3][1]+"</td>";
+                        html+=          "<td>"+"最大"+"</td>";
+                        html+=      "</tr>";
+                        html+="</thead>";
+                        html+="<tbody>";
+                        for(let i=0;i<result[0].length;i++){
+                            html+="<tr>";
+                            html+=    "<td>"+result[2][i].name+"</td>";
+                            html+=    "<td>"+result[0][i]+"</td>";
+                            html+=    "<td>"+result[1][i]+"</td>";
+                            html+=    "<td>"+result[2][i].max+"</td>";
+                            html+="</tr>";
+                        }
+                        html+="</tbody>";
+                        $("#table2").html(html);
+
+                    });
+                    console.log(result);
+                }
+
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+    $(function () {
+        let html="";
+        html+="<thead>";
+        html+=      "<tr>";
+        html+=          "<td>"+"指标"+"</td>";
+        html+=          "<td>"+"湖北"+"</td>";
+        html+=          "<td>"+"最大"+"</td>";
+        html+=      "</tr>";
+        html+="</thead>";
+        html+="<tbody>";
+        for(let i=0;i<values.length;i++){
+            html+="<tr>";
+            html+=    "<td>"+indicatorValues[i].name+"</td>";
+            html+=    "<td>"+values[i]+"</td>";
+            html+=    "<td>"+indicatorValues[i].max+"</td>";
+            html+="</tr>";
+        }
+        html+="</tbody>";
+        $("#table1").html(html);
+
+    });
+
+    $(function () {
+        let html="";
+        html+="<thead>";
+        html+=      "<tr>";
+        html+=          "<td>"+"指标"+"</td>";
+        html+=          "<td>"+"湖北"+"</td>";
+        html+=          "<td>"+"广东"+"</td>";
+        html+=          "<td>"+"最大"+"</td>";
+        html+=      "</tr>";
+        html+="</thead>";
+        html+="<tbody>";
+        for(let i=0;i<values.length;i++){
+            html+="<tr>";
+            html+=    "<td>"+indicatorValues[i].name+"</td>";
+            html+=    "<td>"+values[i]+"</td>";
+            html+=    "<td>"+values1[i]+"</td>";
+            html+=    "<td>"+indicatorValues[i].max+"</td>";
+            html+="</tr>";
+        }
+        html+="</tbody>";
+        $("#table2").html(html);
+
+    });
+
+
+</script>
 </html>
