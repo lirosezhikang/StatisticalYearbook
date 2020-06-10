@@ -1,7 +1,10 @@
 package com.silence.statisticalyearbook.controller;
 
 import com.silence.statisticalyearbook.dao.AreaData;
+import com.silence.statisticalyearbook.dao.TableAll;
 import com.silence.statisticalyearbook.mapper.AreaMapper;
+import com.silence.statisticalyearbook.mapper.ManageMapper;
+import com.silence.statisticalyearbook.mapper.YearMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,12 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class AreaController {
 
     @Autowired
     AreaMapper areaMapper;
+
+    @Autowired
+    ManageMapper manageMapper;
 
     @GetMapping("/area")
     public String Area(@RequestParam(name = "dataSelected",defaultValue = "total_value") String dataSelected,
@@ -54,4 +61,14 @@ public class AreaController {
         model.addAttribute("unit",unit);
         return "area";
     }
+
+    @GetMapping("/grid2")
+    public String grid2(@RequestParam(name = "tableSelected",defaultValue = "total_value1") String tableName,
+                        Model model){
+        List<TableAll> result=manageMapper.queryAll(tableName);
+        model.addAttribute("result",result);
+        return "grid-view2";
+    }
+
+
 }

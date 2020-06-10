@@ -1,205 +1,554 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:v-for="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html>
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org" xmlns:v-for="http://www.w3.org/1999/xhtml"
       xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
 <head>
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>统计年鉴</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="media/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="dependencies/bootstrap/css/bootstrap.min.css">
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="dependencies/fontawesome/css/all.min.css">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="dependencies/flaticon/flaticon.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="dependencies/owl.carousel/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="dependencies/owl.carousel/css/owl.theme.default.min.css">
+    <!-- Animated Headlines CSS -->
+    <link rel="stylesheet" href="dependencies/jquery-animated-headlines/css/jquery.animatedheadline.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="dependencies/magnific-popup/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="dependencies/animate.css/css/animate.min.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="dependencies/meanmenu/css/meanmenu.min.css">
+    <!-- Site Stylesheet -->
+    <link rel="stylesheet" href="assets/css/app.css">
 
-    <script th:src="@{js/vue.js}" type="text/javascript"></script>
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/echarts.js" type="text/javascript"></script>
-    <script src="js/china.js" type="text/javascript"></script>
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
 
-    <style>
-        .areaDiv{
-            float: left;
-        }
-        .dataDiv{
-            float: left;
-        }
-        .map{
-            float: left;
-            height: 500px;
-            width: 45%;
-            background-color: white;
-            margin: 32px;
-        }
-        .bar{
-            float: right;
-            height: 500px;
-            width: 45%;
-            background-color: white;
-            margin: 32px;
-        }
-        #header3{
-            width: 100%;
-            float: left;
-        }
-        .line_line{
-            float: left;
-            height: 500px;
-            width: 45%;
-            background-color: white;
-            margin: 32px;
-        }
-        .bar_bar{
-            float: right;
-            height: 500px;
-            width: 45%;
-            background-color: white;
-            margin: 32px;
-        }
-        body{
-            background-color: #eee;
-        }
-    </style>
 </head>
-<body>
-    <div class="all">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <ul class="nav nav-tabs">
-                        <li role="presentation"><a href="/">主页</a></li>
-                        <li role="presentation"><a href="/area">地区差异</a></li>
-                        <li role="presentation" class="active"><a href="/year">年度变化</a></li>
-                        <li role="presentation"><a href="#">相关新闻</a></li>
-                        <li role="presentation"><a href="#">生活分享</a></li>
-                    </ul>
-                </div>
 
+<body class="sticky-header">
+<!--[if lte IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<![endif]-->
+<!-- ScrollUp Start Here -->
+<a href="#wrapper" data-type="section-switch" class="scrollup">
+    <i class="fas fa-angle-double-up"></i>
+</a>
+<!-- ScrollUp End Here -->
+<!-- Preloader Start Here -->
+<div id="preloader"></div>
+<!-- Preloader End Here -->
+<div id="wrapper" class="wrapper">
 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown" th:if="${session.user!=null}">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                               aria-expanded="false">
-                                <span th:text="${session.user.getName()}"></span>
-                                <span class="caret"></span>
-                                <!--                            <span th:text="${session.user.getName()}"></span>-->
+    <!--=====================================-->
+    <!--=            Header Start           =-->
+    <!--=====================================-->
+    <header class="header">
+        <div id="rt-sticky-placeholder"></div>
+        <div id="header-menu" class="header-menu menu-layout2">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-2">
+                        <div class="logo-area">
+                            <a href="/" class="temp-logo">
+                                <img src="media/logo.png" alt="logo" class="img-fluid">
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/profile/questions">我的问题</a></li>
-                                <li><a href="#">个人资料</a></li>
-                                <li><a href="/logout">退出登录</a></li>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 d-flex justify-content-end">
+                        <nav id="dropdown" class="template-main-menu">
+                            <ul>
+                                <li>
+                                    <a href="/" class="btn-outline-dark">主页</a>
+                                </li>
+                                <li>
+                                    <a href="/area" class="btn-outline-dark">地区差异</a>
+                                </li>
+                                <li>
+                                    <a href="/year" class="btn-outline-dark">年度变化</a>
+                                </li>
+                                <li>
+                                    <a href="/websites" class="btn-outline-dark">相关网站</a>
+                                </li>
+                                <li>
+                                    <a href="/news" class="btn-outline-dark">相关新闻</a>
+                                </li>
                             </ul>
-                        </li>
-                        <li th:if="${session.user==null}">
-                            <a href="https://github.com/login/oauth/authorize?client_id=7508138ae2bb78dee041&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a>
-                        </li>
+                        </nav>
+                    </div>
+                    <div class="col-lg-3 d-flex justify-content-end">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="display: contents">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown" th:if="${session.username!=null}">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                       aria-expanded="false">
+                                        <span th:text="${session.username}"></span>
+                                        <span class="caret"></span>
+                                        <!--                            <span th:text="${session.user.getName()}"></span>-->
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/manage">管理数据库</a></li>
+                                        <li><a href="/logout">退出登录</a></li>
+                                    </ul>
+                                </li>
+                                <li th:if="${session.username==null}">
+                                    <a href="/login">登录</a>
+                                </li>
 
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--=====================================-->
+    <!--=        Inner Banner Start         =-->
+    <!--=====================================-->
+    <section class="inner-page-banner" data-bg-image="media/banner/banner1.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumbs-area">
+                        <h1>年度变化</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=====================================-->
+    <!--=          Search Box Start         =-->
+    <!--=====================================-->
+    <section class="bg-accent" id="header2">
+        <div class="container">
+            <div class="search-box-wrap-layout3">
+                <div class="search-box-layout1">
+                    <form action="#">
+                        <div class="row no-gutters">
+                            <div class="col-lg-2 form-group">
+                                <div class="input-search-btn search-category">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <label>选择地区</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 form-group">
+                                <div class="input-search-btn search-category">
+                                    <select id="area2" v-model="areaSelected" class="custom-select">
+                                        <option v-for="(item,i) in areaType" v-bind:value="item.value">{{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 form-group">
+                                <div class="input-search-btn search-category">
+                                    <i class="fas fa-tags"></i>
+                                    <label>选择数据</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 form-group">
+                                <div class="input-search-btn search-category">
+                                    <select id="data2" v-model="dataSelected" class="custom-select">
+                                        <option v-for="(item,i) in dataType" v-bind:value="item.value">{{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 form-group">
+                                <button class="submit-btn" onclick="submit2()"><i class="fas fa-search"></i>Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=====================================-->
+    <!--=          Product Start         =-->
+    <!--=====================================-->
+    <section class="product-inner-wrap-layout1 bg-accent">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 sidebar-break-md sidebar-widget-area" id="accordion">
+                    <div class="widget-bottom-margin-md widget-accordian widget-filter">
+                        <h3 class="widget-bg-title">Data Frame</h3>
+                        <div id="tableDiv1" class="tableDiv">
+                            <table class="table table-responsive table-hover" id="table1">
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-8">
+                    <div class="product-filter-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h2 class="item-title">Visualization Charts</h2>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-md-end justify-content-center">
+                                <div class="product-sorting">
+                                    <div class="layout-switcher">
+                                        <ul>
+                                            <li>
+                                                <a href="#" data-type="product-box-list" class="product-view-trigger">
+                                                    <i class="fas fa-th-list"></i>
+                                                </a>
+                                            </li>
+                                            <li class="active">
+                                                <a class="product-view-trigger" href="#" data-type="product-box-grid">
+                                                    <i class="fas fa-th-large"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="product-view" class="product-box-grid">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12">
+                                <div class="product-grid-view">
+                                    <div class="grid-view-layout1">
+                                        <div class="product-box-layout1 top-rated-grid">
+                                            <div class="item-img">
+                                                <div id="map" class="map" style="height: 500px;width: 100%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-md-12">
+                                <div class="product-grid-view">
+                                    <div class="grid-view-layout1">
+                                        <div class="product-box-layout1 top-rated-grid">
+                                            <div class="item-img">
+                                                <div id="bar" class="bar" style="height: 500px;width: 100%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=====================================-->
+    <!--=          Search Box Start2        =-->
+    <!--=====================================-->
+    <section class="bg-accent" id="header3">
+        <div class="container">
+            <div class="search-box-wrap-layout3">
+                <div class="search-box-layout1">
+                    <form action="#">
+                        <div class="row no-gutters">
+                            <div class="col-lg-3 form-group">
+                                <div class="input-search-btn search-category">
+                                    <select id="area3" v-model="areaSelected1" class="custom-select">
+                                        <option v-for="(item,i) in areaType" v-bind:value="item.value">{{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 form-group">
+                                <div class="input-search-btn search-category">
+                                    <label>VS</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 form-group">
+                                <div class="input-search-btn search-category">
+                                    <select id="area33" v-model="areaSelected2" class="custom-select">
+                                        <option v-for="(item,i) in areaType" v-bind:value="item.value">{{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 form-group">
+                                <div class="input-search-btn search-category">
+                                    <select id="data3" v-model="dataSelected" class="custom-select">
+                                        <option v-for="(item,i) in dataType" v-bind:value="item.value">{{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 form-group">
+                                <button type="button" class="submit-btn" onclick="submit3()"><i class="fas fa-search"></i>Compare</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=====================================-->
+    <!--=          Product Start2         =-->
+    <!--=====================================-->
+    <section class="product-inner-wrap-layout1 bg-accent">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 sidebar-break-md sidebar-widget-area" id="accordion2">
+                    <div class="widget-bottom-margin-md widget-accordian widget-filter">
+                        <h3 class="widget-bg-title">Data Frame</h3>
+                        <div id="tableDiv2" class="tableDiv">
+                            <table class="table table-responsive table-hover" id="table2">
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-8">
+                    <div class="product-filter-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h2 class="item-title">Visualization Charts</h2>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-md-end justify-content-center">
+                                <div class="product-sorting">
+                                    <div class="layout-switcher">
+                                        <ul>
+                                            <li>
+                                                <a href="#" data-type="product-box-list" class="product-view-trigger">
+                                                    <i class="fas fa-th-list"></i>
+                                                </a>
+                                            </li>
+                                            <li class="active">
+                                                <a class="product-view-trigger" href="#" data-type="product-box-grid">
+                                                    <i class="fas fa-th-large"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="product-view1" class="product-box-grid">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12">
+                                <div class="product-grid-view">
+                                    <div class="grid-view-layout1">
+                                        <div class="product-box-layout1 top-rated-grid">
+                                            <div class="item-img">
+                                                <div id="line_line" class="line_line" style="height: 500px;width: 100%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-md-12">
+                                <div class="product-grid-view">
+                                    <div class="grid-view-layout1">
+                                        <div class="product-box-layout1 top-rated-grid">
+                                            <div class="item-img">
+                                                <div id="bar_bar" class="bar_bar" style="height: 500px;width: 100%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="pagination-layout1">
+        <div class="btn-prev">
+            <a href="/area"><i class="fas fa-angle-double-left"></i>Previous</a>
+        </div>
+        <div class="page-number">
+            <a href="/">1</a>
+            <a href="/area">2</a>
+            <a href="/year" class="active">3</a>
+            <a href="/websites">4</a>
+            <a href="/news">5</a>
+        </div>
+        <div class="btn-next">
+            <a href="/websites">Next<i class="fas fa-angle-double-right"></i></a>
+        </div>
+    </div>
+    <!--=====================================-->
+    <!--=       Footer Start           	=-->
+    <!--=====================================-->
+    <footer>
+        <div class="footer-top-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer-box-layout1">
+                            <div class="footer-logo">
+                                <img src="media/logo.png" alt="logo">
+                            </div>
+                            <p>这是一个数据统计可视化网站，主要展示中国近年来的统计数据，以及相关的新闻和网站</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer-box-layout1">
+                            <div class="footer-title">
+                                <h3>网站制作人</h3>
+                            </div>
+                            <div class="footer-menu-box">
+                                <ul>
+                                    <li><a href="#">Silence Li</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer-box-layout1">
+                            <div class="footer-title">
+                                <h3>所属单位</h3>
+                            </div>
+                            <div class="footer-menu-box">
+                                <ul>
+                                    <li><a href="#">武汉大学</a></li>
+                                    <li><a href="#">遥感信息工程学院</a></li>
+                                    <li><a href="#">地理信息工程GIS</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer-box-layout1">
+                            <div class="footer-title">
+                                <h3>联系方式</h3>
+                            </div>
+                            <div class="footer-menu-box">
+                                <ul>
+                                    <li><a href="#">QQ：2118656521</a></li>
+                                    <li><a href="#">邮箱：</a></li>
+                                    <li><a href="#">2118656521@qq.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="copyright-text">
+                            Copyright &copy; Wuhan University All rights reserved.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--=====================================-->
+    <!--=       Modal Start           	 	=-->
+    <!--=====================================-->
+    <div class="modal fade modal-location" id="modal-location" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                    <span class="fas fa-times" aria-hidden="true"></span>
+                </button>
+                <div class="location-list">
+                    <h4 class="item-title">Location</h4>
+                    <ul>
+                        <li><a href="#">California</a></li>
+                        <li><a href="#">Kansas</a></li>
+                        <li><a href="#">Louisiana</a></li>
+                        <li><a href="#">New Jersey</a></li>
+                        <li><a href="#">New York</a></li>
                     </ul>
                 </div>
             </div>
-        </nav>
+        </div>
     </div>
-
-
-    <div class="panel panel-default" id="header2">
-        <div class="panel-body">
-            <div class="areaDiv">
-                <label for="area2">地区</label>
-                <select id="area2" v-model="areaSelected">
-                    <option v-for="(item,i) in areaType" v-bind:value="item.value">{{item.name}}</option>
-                </select>
+    <div class="modal fade modal-location" id="modal-category" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                    <span class="fas fa-times" aria-hidden="true"></span>
+                </button>
+                <div class="location-list">
+                    <h4 class="item-title">Category</h4>
+                    <ul>
+                        <li>
+                            <a href="#"><span class="item-icon"><img src="media/category/category5.png" alt="icon"></span>Business &amp; Industry</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="item-icon"><img src="media/category/category7.png" alt="icon"></span>Cars &amp; Vehicles</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="item-icon"><img src="media/category/category14.png" alt="icon"></span>Electronics</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="item-icon"><img src="media/category/category4.png" alt="icon"></span>Health &amp; Beauty</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="item-icon"><img src="media/category/category18.png" alt="icon"></span>Hobby, Sport &amp; Kids</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="item-icon"><img src="media/category/category8.png" alt="icon"></span>Home Appliances</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="item-icon"><img src="media/category/category6.png" alt="icon"></span>Jobs</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="item-icon"><img src="media/category/category12.png" alt="icon"></span>Others</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="item-icon"><img src="media/category/category11.png" alt="icon"></span>Pets &amp; Animals</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="item-icon"><img src="media/category/category3.png" alt="icon"></span>Property</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="item-icon"><img src="media/category/category1.png" alt="icon"></span>Services</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
-            <div class="dataDiv">
-                <label for="data2">数据类型</label>
-                <select id="data2" v-model="dataSelected">
-                    <option v-for="(item,i) in dataType" v-bind:value="item.value">{{item.name}}</option>
-                </select>
-            </div>
-
-            <button onclick="submit2()">确定</button>
-
         </div>
     </div>
 
-    <div id="map" class="map"></div>
-    <div id="bar" class="bar"></div>
+</div>
+<!-- Jquery Js -->
+<script src="dependencies/jquery/js/jquery.min.js"></script>
+<!-- Popper Js -->
+<script src="dependencies/popper.js/js/popper.min.js"></script>
+<!-- Bootstrap Js -->
+<script src="dependencies/bootstrap/js/bootstrap.min.js"></script>
+<!-- Waypoints Js -->
+<script src="dependencies/waypoints/js/jquery.waypoints.min.js"></script>
+<!-- Counterup Js -->
+<script src="dependencies/jquery.counterup/js/jquery.counterup.min.js"></script>
+<!-- Owl Carousel Js -->
+<script src="dependencies/owl.carousel/js/owl.carousel.min.js"></script>
+<!-- ImagesLoaded Js -->
+<script src="dependencies/imagesloaded/js/imagesloaded.pkgd.min.js"></script>
+<!-- Isotope Js -->
+<script src="dependencies/isotope-layout/js/isotope.pkgd.min.js"></script>
+<!-- Animated Headline Js -->
+<script src="dependencies/jquery-animated-headlines/js/jquery.animatedheadline.min.js"></script>
+<!-- Magnific Popup Js -->
+<script src="dependencies/magnific-popup/js/jquery.magnific-popup.min.js"></script>
+<!-- ElevateZoom Js -->
+<script src="dependencies/elevatezoom/js/jquery.elevateZoom-2.2.3.min.js"></script>
+<!-- Bootstrap Validate Js -->
+<script src="dependencies/bootstrap-validator/js/validator.min.js"></script>
+<!-- Meanmenu Js -->
+<script src="dependencies/meanmenu/js/jquery.meanmenu.min.js"></script>
+<!-- Google Map js -->
+<!--    <script src="https://ditu.google.cn/maps/api/js?key=AIzaSyBtmXSwv4YmAKtcZyyad9W7D4AC08z0Rb4"></script>-->
+<!-- Site Scripts -->
+<script src="assets/js/app.js"></script>
 
-    <div class="panel panel-default" id="header3">
-        <div class="panel-body">
-            <div class="areaDiv one">
-                <label for="area3">地区</label>
-                <select id="area3" v-model="areaSelected1">
-                    <option v-for="(item,i) in areaType" v-bind:value="item.value">{{item.name}}</option>
-                </select>
-            </div>
-
-            <div class="areaDiv two">
-                <label for="area33">地区</label>
-                <select id="area33" v-model="areaSelected2">
-                    <option v-for="(item,i) in areaType" v-bind:value="item.value">{{item.name}}</option>
-                </select>
-            </div>
-
-            <div class="dataDiv">
-                <label for="data3">数据类型</label>
-                <select id="data3" v-model="dataSelected">
-                    <option v-for="(item,i) in dataType" v-bind:value="item.value">{{item.name}}</option>
-                </select>
-            </div>
-
-            <button onclick="submit3()">比较</button>
-
-        </div>
-    </div>
-
-    <div id="line_line" class="line_line"></div>
-    <div id="bar_bar" class="bar_bar"></div>
-</body>
-
-<!--<script>-->
-<!--    let vue1=new Vue({-->
-<!--        el:"#header1",-->
-<!--        data:{-->
-<!--            areaSelected:"",-->
-<!--            areaType:[-->
-<!--                {name:'西藏',value:'xizang'},-->
-<!--                {name:'青海',value:'qinhai'},-->
-<!--                {name:'宁夏',value:'ningxia'},-->
-<!--                {name:'海南',value:'hainan'},-->
-<!--                {name:'甘肃',value:'gansu'},-->
-<!--                {name:'贵州',value:'guizhou'},-->
-<!--                {name:'新疆',value:'xinjiang'},-->
-<!--                {name:'云南',value:'yunnan'},-->
-<!--                {name:'重庆',value:'chongqin'},-->
-<!--                {name:'吉林',value:'jilin'},-->
-<!--                {name:'山西',value:'shanxi'},-->
-<!--                {name:'天津',value:'tianjing'},-->
-<!--                {name:'江西',value:'jiangxi'},-->
-<!--                {name:'广西',value:'guangxi'},-->
-<!--                {name:'陕西',value:'shaanxi'},-->
-<!--                {name:'黑龙江',value:'heilongjiang'},-->
-<!--                {name:'内蒙古',value:'neimeng'},-->
-<!--                {name:'安徽',value:'anhui'},-->
-<!--                {name:'北京',value:'beijing'},-->
-<!--                {name:'福建',value:'fujian'},-->
-<!--                {name:'上海',value:'shanghai'},-->
-<!--                {name:'湖北',value:'hubei'},-->
-<!--                {name:'湖南',value:'hainan'},-->
-<!--                {name:'四川',value:'sichuan'},-->
-<!--                {name:'辽宁',value:'liaoning'},-->
-<!--                {name:'河北',value:'hebei'},-->
-<!--                {name:'河南',value:'henan'},-->
-<!--                {name:'浙江',value:'zhejiang'},-->
-<!--                {name:'山东',value:'shandong'},-->
-<!--                {name:'江苏',value:'jiangsu'},-->
-<!--                {name:'广东',value:'guangdong'}-->
-<!--            ],-->
-<!--        },-->
-<!--        created(){-->
-<!--            this.areaSelected=this.areaType[this.areaType.length-1].value;-->
-<!--        },-->
-<!--        methods:{-->
-<!--        }-->
-<!--    });-->
-<!--</script>-->
+<script th:src="@{js/vue.js}" type="text/javascript"></script>
+<script src="js/echarts.js" type="text/javascript"></script>
+<script src="js/china.js" type="text/javascript"></script>
 
 <script>
     let vue2=new Vue({
@@ -568,4 +917,6 @@
 
     }
 </script>
+</body>
+
 </html>

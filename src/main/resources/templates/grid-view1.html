@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org" xmlns:v-for="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>统计年鉴</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="media/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="dependencies/bootstrap/css/bootstrap.min.css">
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="dependencies/fontawesome/css/all.min.css">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="dependencies/flaticon/flaticon.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="dependencies/owl.carousel/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="dependencies/owl.carousel/css/owl.theme.default.min.css">
+    <!-- Animated Headlines CSS -->
+    <link rel="stylesheet" href="dependencies/jquery-animated-headlines/css/jquery.animatedheadline.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="dependencies/magnific-popup/css/magnific-popup.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="dependencies/animate.css/css/animate.min.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" href="dependencies/meanmenu/css/meanmenu.min.css">
+    <!-- Site Stylesheet -->
+    <link rel="stylesheet" href="assets/css/app.css">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="sticky-header">
+    <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  	<![endif]-->
+    <!-- ScrollUp Start Here -->
+    <a href="#wrapper" data-type="section-switch" class="scrollup">
+        <i class="fas fa-angle-double-up"></i>
+    </a>
+    <!-- ScrollUp End Here -->
+    <!-- Preloader Start Here -->
+    <div id="preloader"></div>
+    <!-- Preloader End Here -->
+    <div id="wrapper" class="wrapper">
+
+        <!--=====================================-->
+        <!--=            Header Start           =-->
+        <!--=====================================-->
+        <header class="header">
+            <div id="rt-sticky-placeholder"></div>
+            <div id="header-menu" class="header-menu menu-layout2">
+                <div class="container">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-lg-2">
+                            <div class="logo-area">
+                                <a href="/" class="temp-logo">
+                                    <img src="media/logo.png" alt="logo" class="img-fluid">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 d-flex justify-content-end">
+                            <nav id="dropdown" class="template-main-menu">
+                                <ul>
+                                    <li>
+                                        <a href="/" class="btn-outline-dark">主页</a>
+                                    </li>
+                                    <li>
+                                        <a href="/area" class="btn-outline-dark">地区差异</a>
+                                    </li>
+                                    <li>
+                                        <a href="/year" class="btn-outline-dark">年度变化</a>
+                                    </li>
+                                    <li>
+                                        <a href="/websites" class="btn-outline-dark">相关网站</a>
+                                    </li>
+                                    <li>
+                                        <a href="/news" class="btn-outline-dark">相关新闻</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-lg-3 d-flex justify-content-end">
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="display: contents">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown" th:if="${session.username!=null}">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                           aria-expanded="false">
+                                            <span th:text="${session.username}"></span>
+                                            <span class="caret"></span>
+                                            <!--                            <span th:text="${session.user.getName()}"></span>-->
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/manage">管理数据库</a></li>
+                                            <li><a href="/logout">退出登录</a></li>
+                                        </ul>
+                                    </li>
+                                    <li th:if="${session.username==null}">
+                                        <a href="/login">登录</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!--=====================================-->
+        <!--=        Inner Banner Start         =-->
+        <!--=====================================-->
+        <section class="inner-page-banner" data-bg-image="media/banner/banner1.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcrumbs-area">
+                            <h1>主页</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================-->
+        <!--=          Search Box Start         =-->
+        <!--=====================================-->
+        <section class="bg-accent" id="header2">
+            <div class="container">
+                <div class="search-box-wrap-layout3">
+                    <div class="search-box-layout1">
+                        <form action="#">
+                            <div class="row no-gutters">
+                                <div class="col-lg-2 form-group">
+                                    <div class="input-search-btn search-category">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <label>选择地区</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <div class="input-search-btn search-category">
+                                        <select id="area2" v-model="areaSelected" class="custom-select">
+                                            <option v-for="(item,i) in areaType" v-bind:value="item.value">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 form-group">
+                                    <div class="input-search-btn search-category">
+                                        <i class="fas fa-tags"></i>
+                                        <label>选择数据</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <div class="input-search-btn search-category">
+                                        <select id="year2" v-model="yearSelected" class="custom-select">
+                                            <option v-for="(item,i) in yearSeries" v-bind:value="item.value">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 form-group">
+                                    <button type="button" class="submit-btn" onclick="submit2()"><i class="fas fa-search"></i>Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================-->
+        <!--=          Product Start         =-->
+        <!--=====================================-->
+        <section class="product-inner-wrap-layout1 bg-accent">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4 sidebar-break-md sidebar-widget-area" id="accordion">
+                        <div class="widget-bottom-margin-md widget-accordian widget-filter">
+                            <h3 class="widget-bg-title">Data Frame</h3>
+                            <div id="tableDiv1" class="tableDiv">
+                                <table class="table table-responsive table-hover" id="table1">
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-8">
+                        <div class="product-filter-heading">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h2 class="item-title">Visualization Charts</h2>
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-md-end justify-content-center">
+                                    <div class="product-sorting">
+                                        <div class="layout-switcher">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" data-type="product-box-list" class="product-view-trigger">
+                                                        <i class="fas fa-th-list"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="active">
+                                                    <a class="product-view-trigger" href="#" data-type="product-box-grid">
+                                                        <i class="fas fa-th-large"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="product-view" class="product-box-grid">
+                            <div class="row">
+                                <div class="col-xl-8 col-md-12">
+                                    <div class="product-grid-view">
+                                        <div class="grid-view-layout1">
+                                            <div class="product-box-layout1 top-rated-grid">
+                                                <div class="item-img">
+                                                    <div id="map" class="map" style="height: 450px;width: 100%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="product-grid-view">
+                                        <div class="grid-view-layout1">
+                                            <div class="product-box-layout1">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html"><img src="media/product/product1.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="item-content">
+                                                    <h3 class="item-title"><a href="single-product1.html">HD 27 inch Mac 1 year used only</a><span>New</span></h3>
+                                                    <ul class="entry-meta">
+                                                        <li><i class="far fa-clock"></i>4 months ago</li>
+                                                        <li><i class="fas fa-map-marker-alt"></i>Port Chester, New York</li>
+                                                    </ul>
+                                                    <div class="item-price">
+                                                        <span class="currency-symbol">$</span>
+                                                        2,500
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="list-view-layout1">
+                                            <div class="product-box-layout3">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html"><img src="media/product/product9.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="item-content">
+                                                        <h3 class="item-title"><a href="single-product1.html">HD 27 inch Mac 1 year used only</a><span>New</span></h3>
+                                                        <ul class="item-condition">
+                                                            <li><span>Brand:</span> Other Brand</li>
+                                                            <li><span>Condition:</span> New</li>
+                                                            <li><span>Item Type:</span> Digital Camera</li>
+                                                        </ul>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do dolore magna aliqua. In eu mi bibendum neque egestas…</p>
+                                                        <ul class="entry-meta">
+                                                            <li><i class="far fa-clock"></i>3 months ago</li>
+                                                            <li><i class="fas fa-map-marker-alt"></i>Port Chester, New York</li>
+                                                            <li><i class="far fa-eye"></i>126 Views</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item-right">
+                                                        <div class="item-price">
+                                                            <span class="currency-symbol">$</span>
+                                                            2,500
+                                                        </div>
+                                                        <div class="item-btn">
+                                                            <a href="#">Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="product-grid-view">
+                                        <div class="grid-view-layout1">
+                                            <div class="product-box-layout1">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html"><img src="media/product/product2.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="item-content">
+                                                    <h3 class="item-title"><a href="single-product1.html">New Banded Smart Watch</a><span>New</span></h3>
+                                                    <ul class="entry-meta">
+                                                        <li><i class="far fa-clock"></i>4 months ago</li>
+                                                        <li><i class="fas fa-map-marker-alt"></i>Kansas, Emporia</li>
+                                                    </ul>
+                                                    <div class="item-price">
+                                                        <span class="currency-symbol">$</span>
+                                                        47
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="list-view-layout1">
+                                            <div class="product-box-layout3">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html"><img src="media/product/product10.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="item-content">
+                                                        <h3 class="item-title"><a href="single-product1.html">New Banded Smart Watch</a><span>New</span></h3>
+                                                        <ul class="item-condition">
+                                                            <li><span>Device Type:</span> Laptop</li>
+                                                            <li><span>Condition:</span> New</li>
+                                                            <li><span>Model:</span> ZX-4356</li>
+                                                        </ul>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, et dolore magna aliqua. In eu mi bibendum neque egestas…</p>
+                                                        <ul class="entry-meta">
+                                                            <li><i class="far fa-clock"></i>3 months ago</li>
+                                                            <li><i class="fas fa-map-marker-alt"></i>Kansas, Emporia</li>
+                                                            <li><i class="far fa-eye"></i>78 Views</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item-right">
+                                                        <div class="item-price">
+                                                            <span class="currency-symbol">$</span>
+                                                            47
+                                                        </div>
+                                                        <div class="item-btn">
+                                                            <a href="#">Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="product-grid-view">
+                                        <div class="grid-view-layout1">
+                                            <div class="product-box-layout1">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html" class="item-trending"><img src="media/product/product3.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="item-content">
+                                                    <h3 class="item-title"><a href="single-product1.html">High quality brand new headphone</a><span>New</span></h3>
+                                                    <ul class="entry-meta">
+                                                        <li><i class="far fa-clock"></i>4 months ago</li>
+                                                        <li><i class="fas fa-map-marker-alt"></i>New York, Mineola</li>
+                                                    </ul>
+                                                    <div class="item-price">
+                                                        <span class="currency-symbol">$</span>
+                                                        15
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="list-view-layout1">
+                                            <div class="product-box-layout3">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html" class="item-trending"><img src="media/product/product11.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="item-content">
+                                                        <h3 class="item-title"><a href="single-product1.html">High quality brand new headphone</a><span>New</span></h3>
+                                                        <ul class="item-condition">
+                                                            <li><span>Condition:</span> Used</li>
+                                                        </ul>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, dolore magna aliqua. In eu mi bibendum neque egestas…</p>
+                                                        <ul class="entry-meta">
+                                                            <li><i class="far fa-clock"></i>3 months ago</li>
+                                                            <li><i class="fas fa-map-marker-alt"></i>New York, Mineola</li>
+                                                            <li><i class="far fa-eye"></i>40 Views</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item-right">
+                                                        <div class="item-price">
+                                                            <span class="currency-symbol">$</span>
+                                                            15
+                                                        </div>
+                                                        <div class="item-btn">
+                                                            <a href="#">Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="product-grid-view">
+                                        <div class="grid-view-layout1">
+                                            <div class="product-box-layout1">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html"><img src="media/product/product4.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="item-content">
+                                                    <h3 class="item-title"><a href="single-product1.html">Running shoes imported from china</a><span>New</span></h3>
+                                                    <ul class="entry-meta">
+                                                        <li><i class="far fa-clock"></i>4 months ago</li>
+                                                        <li><i class="fas fa-map-marker-alt"></i>California, Bakersfield</li>
+                                                    </ul>
+                                                    <div class="item-price">
+                                                        <span class="currency-symbol">$</span>
+                                                        36
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="list-view-layout1">
+                                            <div class="product-box-layout3">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html"><img src="media/product/product12.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="item-content">
+                                                        <h3 class="item-title"><a href="single-product1.html">Running shoes imported from china</a><span>New</span></h3>
+                                                        <ul class="item-condition">
+                                                            <li><span>Equipment Type:</span> Football</li>
+                                                            <li><span>Condition:</span> New</li>
+                                                        </ul>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, dolore magna aliqua. In eu mi bibendum neque egestas…</p>
+                                                        <ul class="entry-meta">
+                                                            <li><i class="far fa-clock"></i>3 months ago</li>
+                                                            <li><i class="fas fa-map-marker-alt"></i>California, Bakersfield</li>
+                                                            <li><i class="far fa-eye"></i>95 Views</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item-right">
+                                                        <div class="item-price">
+                                                            <span class="currency-symbol">$</span>
+                                                            36
+                                                        </div>
+                                                        <div class="item-btn">
+                                                            <a href="#">Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================-->
+        <!--=          Search Box Start2        =-->
+        <!--=====================================-->
+        <section class="bg-accent" id="header3">
+            <div class="container">
+                <div class="search-box-wrap-layout3">
+                    <div class="search-box-layout1">
+                        <form action="#">
+                            <div class="row no-gutters">
+                                <div class="col-lg-3 form-group">
+                                    <div class="input-search-btn search-category">
+                                        <select id="area3" v-model="areaSelected1" class="custom-select">
+                                            <option v-for="(item,i) in areaType" v-bind:value="item.value">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 form-group">
+                                    <div class="input-search-btn search-category">
+                                        <label>VS</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <div class="input-search-btn search-category">
+                                        <select id="area33" v-model="areaSelected2" class="custom-select">
+                                            <option v-for="(item,i) in areaType" v-bind:value="item.value">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 form-group">
+                                    <div class="input-search-btn search-category">
+                                        <select id="year3" v-model="yearSelected" class="custom-select">
+                                            <option v-for="(item,i) in yearSeries" v-bind:value="item.value">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 form-group">
+                                    <button type="button" class="submit-btn" onclick="submit3()"><i class="fas fa-search"></i>Compare</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================-->
+        <!--=          Product Start2        =-->
+        <!--=====================================-->
+        <section class="product-inner-wrap-layout1 bg-accent">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-6 sidebar-break-md sidebar-widget-area" id="accordion2">
+                        <div class="widget-bottom-margin-md widget-accordian widget-filter">
+                            <h3 class="widget-bg-title">Data Frame</h3>
+                            <div id="tableDiv2" class="tableDiv">
+                                <table class="table table-responsive table-hover" id="table2">
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-7 col-lg-6">
+                        <div class="product-filter-heading">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h2 class="item-title">Visualization Charts</h2>
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-md-end justify-content-center">
+                                    <div class="product-sorting">
+                                        <div class="layout-switcher">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" data-type="product-box-list" class="product-view-trigger">
+                                                        <i class="fas fa-th-list"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="active">
+                                                    <a class="product-view-trigger" href="#" data-type="product-box-grid">
+                                                        <i class="fas fa-th-large"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="product-view2" class="product-box-grid">
+                            <div class="row">
+                                <div class="col-xl-12 col-md-12">
+                                    <div class="product-grid-view">
+                                        <div class="grid-view-layout1">
+                                            <div class="product-box-layout1 top-rated-grid">
+                                                <div class="item-img">
+                                                    <div id="radio2" class="radio2" style="height: 450px;width: 100%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="product-grid-view">
+                                        <div class="grid-view-layout1">
+                                            <div class="product-box-layout1">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html"><img src="media/product/product1.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="item-content">
+                                                    <h3 class="item-title"><a href="single-product1.html">HD 27 inch Mac 1 year used only</a><span>New</span></h3>
+                                                    <ul class="entry-meta">
+                                                        <li><i class="far fa-clock"></i>4 months ago</li>
+                                                        <li><i class="fas fa-map-marker-alt"></i>Port Chester, New York</li>
+                                                    </ul>
+                                                    <div class="item-price">
+                                                        <span class="currency-symbol">$</span>
+                                                        2,500
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="list-view-layout1">
+                                            <div class="product-box-layout3">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html"><img src="media/product/product9.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="item-content">
+                                                        <h3 class="item-title"><a href="single-product1.html">HD 27 inch Mac 1 year used only</a><span>New</span></h3>
+                                                        <ul class="item-condition">
+                                                            <li><span>Brand:</span> Other Brand</li>
+                                                            <li><span>Condition:</span> New</li>
+                                                            <li><span>Item Type:</span> Digital Camera</li>
+                                                        </ul>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do dolore magna aliqua. In eu mi bibendum neque egestas…</p>
+                                                        <ul class="entry-meta">
+                                                            <li><i class="far fa-clock"></i>3 months ago</li>
+                                                            <li><i class="fas fa-map-marker-alt"></i>Port Chester, New York</li>
+                                                            <li><i class="far fa-eye"></i>126 Views</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item-right">
+                                                        <div class="item-price">
+                                                            <span class="currency-symbol">$</span>
+                                                            2,500
+                                                        </div>
+                                                        <div class="item-btn">
+                                                            <a href="#">Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="product-grid-view">
+                                        <div class="grid-view-layout1">
+                                            <div class="product-box-layout1">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html"><img src="media/product/product2.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="item-content">
+                                                    <h3 class="item-title"><a href="single-product1.html">New Banded Smart Watch</a><span>New</span></h3>
+                                                    <ul class="entry-meta">
+                                                        <li><i class="far fa-clock"></i>4 months ago</li>
+                                                        <li><i class="fas fa-map-marker-alt"></i>Kansas, Emporia</li>
+                                                    </ul>
+                                                    <div class="item-price">
+                                                        <span class="currency-symbol">$</span>
+                                                        47
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="list-view-layout1">
+                                            <div class="product-box-layout3">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html"><img src="media/product/product10.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="item-content">
+                                                        <h3 class="item-title"><a href="single-product1.html">New Banded Smart Watch</a><span>New</span></h3>
+                                                        <ul class="item-condition">
+                                                            <li><span>Device Type:</span> Laptop</li>
+                                                            <li><span>Condition:</span> New</li>
+                                                            <li><span>Model:</span> ZX-4356</li>
+                                                        </ul>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, et dolore magna aliqua. In eu mi bibendum neque egestas…</p>
+                                                        <ul class="entry-meta">
+                                                            <li><i class="far fa-clock"></i>3 months ago</li>
+                                                            <li><i class="fas fa-map-marker-alt"></i>Kansas, Emporia</li>
+                                                            <li><i class="far fa-eye"></i>78 Views</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item-right">
+                                                        <div class="item-price">
+                                                            <span class="currency-symbol">$</span>
+                                                            47
+                                                        </div>
+                                                        <div class="item-btn">
+                                                            <a href="#">Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="product-grid-view">
+                                        <div class="grid-view-layout1">
+                                            <div class="product-box-layout1">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html" class="item-trending"><img src="media/product/product3.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="item-content">
+                                                    <h3 class="item-title"><a href="single-product1.html">High quality brand new headphone</a><span>New</span></h3>
+                                                    <ul class="entry-meta">
+                                                        <li><i class="far fa-clock"></i>4 months ago</li>
+                                                        <li><i class="fas fa-map-marker-alt"></i>New York, Mineola</li>
+                                                    </ul>
+                                                    <div class="item-price">
+                                                        <span class="currency-symbol">$</span>
+                                                        15
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="list-view-layout1">
+                                            <div class="product-box-layout3">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html" class="item-trending"><img src="media/product/product11.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="item-content">
+                                                        <h3 class="item-title"><a href="single-product1.html">High quality brand new headphone</a><span>New</span></h3>
+                                                        <ul class="item-condition">
+                                                            <li><span>Condition:</span> Used</li>
+                                                        </ul>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, dolore magna aliqua. In eu mi bibendum neque egestas…</p>
+                                                        <ul class="entry-meta">
+                                                            <li><i class="far fa-clock"></i>3 months ago</li>
+                                                            <li><i class="fas fa-map-marker-alt"></i>New York, Mineola</li>
+                                                            <li><i class="far fa-eye"></i>40 Views</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item-right">
+                                                        <div class="item-price">
+                                                            <span class="currency-symbol">$</span>
+                                                            15
+                                                        </div>
+                                                        <div class="item-btn">
+                                                            <a href="#">Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="product-grid-view">
+                                        <div class="grid-view-layout1">
+                                            <div class="product-box-layout1">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html"><img src="media/product/product4.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="item-content">
+                                                    <h3 class="item-title"><a href="single-product1.html">Running shoes imported from china</a><span>New</span></h3>
+                                                    <ul class="entry-meta">
+                                                        <li><i class="far fa-clock"></i>4 months ago</li>
+                                                        <li><i class="fas fa-map-marker-alt"></i>California, Bakersfield</li>
+                                                    </ul>
+                                                    <div class="item-price">
+                                                        <span class="currency-symbol">$</span>
+                                                        36
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="list-view-layout1">
+                                            <div class="product-box-layout3">
+                                                <div class="item-img">
+                                                    <a href="single-product1.html"><img src="media/product/product12.jpg" alt="Product"></a>
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="item-content">
+                                                        <h3 class="item-title"><a href="single-product1.html">Running shoes imported from china</a><span>New</span></h3>
+                                                        <ul class="item-condition">
+                                                            <li><span>Equipment Type:</span> Football</li>
+                                                            <li><span>Condition:</span> New</li>
+                                                        </ul>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, dolore magna aliqua. In eu mi bibendum neque egestas…</p>
+                                                        <ul class="entry-meta">
+                                                            <li><i class="far fa-clock"></i>3 months ago</li>
+                                                            <li><i class="fas fa-map-marker-alt"></i>California, Bakersfield</li>
+                                                            <li><i class="far fa-eye"></i>95 Views</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="item-right">
+                                                        <div class="item-price">
+                                                            <span class="currency-symbol">$</span>
+                                                            36
+                                                        </div>
+                                                        <div class="item-btn">
+                                                            <a href="#">Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="pagination-layout1">
+            <div class="btn-prev disabled">
+                <a href="#"><i class="fas fa-angle-double-left"></i>Previous</a>
+            </div>
+            <div class="page-number">
+                <a href="/" class="active">1</a>
+                <a href="/area">2</a>
+                <a href="/year">3</a>
+                <a href="/websites">4</a>
+                <a href="/news">5</a>
+            </div>
+            <div class="btn-next">
+                <a href="/area">Next<i class="fas fa-angle-double-right"></i></a>
+            </div>
+        </div>
+        <!--=====================================-->
+        <!--=       Footer Start           	=-->
+        <!--=====================================-->
+        <footer>
+            <div class="footer-top-wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="footer-box-layout1">
+                                <div class="footer-logo">
+                                    <img src="media/logo.png" alt="logo">
+                                </div>
+                                <p>这是一个数据统计可视化网站，主要展示中国近年来的统计数据，以及相关的新闻和网站</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="footer-box-layout1">
+                                <div class="footer-title">
+                                    <h3>网站制作人</h3>
+                                </div>
+                                <div class="footer-menu-box">
+                                    <ul>
+                                        <li><a href="#">Silence Li</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="footer-box-layout1">
+                                <div class="footer-title">
+                                    <h3>所属单位</h3>
+                                </div>
+                                <div class="footer-menu-box">
+                                    <ul>
+                                        <li><a href="#">武汉大学</a></li>
+                                        <li><a href="#">遥感信息工程学院</a></li>
+                                        <li><a href="#">地理信息工程GIS</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="footer-box-layout1">
+                                <div class="footer-title">
+                                    <h3>联系方式</h3>
+                                </div>
+                                <div class="footer-menu-box">
+                                    <ul>
+                                        <li><a href="#">QQ：2118656521</a></li>
+                                        <li><a href="#">邮箱：</a></li>
+                                        <li><a href="#">2118656521@qq.com</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom-wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="copyright-text">
+                                Copyright &copy; Wuhan University All rights reserved.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--=====================================-->
+        <!--=       Modal Start           	 	=-->
+        <!--=====================================-->
+        <div class="modal fade modal-location" id="modal-location" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                        <span class="fas fa-times" aria-hidden="true"></span>
+                    </button>
+                    <div class="location-list">
+                        <h4 class="item-title">Location</h4>
+                        <ul>
+                            <li><a href="#">California</a></li>
+                            <li><a href="#">Kansas</a></li>
+                            <li><a href="#">Louisiana</a></li>
+                            <li><a href="#">New Jersey</a></li>
+                            <li><a href="#">New York</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade modal-location" id="modal-category" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                        <span class="fas fa-times" aria-hidden="true"></span>
+                    </button>
+                    <div class="location-list">
+                        <h4 class="item-title">Category</h4>
+                        <ul>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category5.png" alt="icon"></span>Business &amp; Industry</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category7.png" alt="icon"></span>Cars &amp; Vehicles</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category14.png" alt="icon"></span>Electronics</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category4.png" alt="icon"></span>Health &amp; Beauty</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category18.png" alt="icon"></span>Hobby, Sport &amp; Kids</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category8.png" alt="icon"></span>Home Appliances</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category6.png" alt="icon"></span>Jobs</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category12.png" alt="icon"></span>Others</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category11.png" alt="icon"></span>Pets &amp; Animals</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category3.png" alt="icon"></span>Property</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="item-icon"><img src="media/category/category1.png" alt="icon"></span>Services</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Jquery Js -->
+    <script src="dependencies/jquery/js/jquery.min.js"></script>
+    <!-- Popper Js -->
+    <script src="dependencies/popper.js/js/popper.min.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="dependencies/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Waypoints Js -->
+    <script src="dependencies/waypoints/js/jquery.waypoints.min.js"></script>
+    <!-- Counterup Js -->
+    <script src="dependencies/jquery.counterup/js/jquery.counterup.min.js"></script>
+    <!-- Owl Carousel Js -->
+    <script src="dependencies/owl.carousel/js/owl.carousel.min.js"></script>
+    <!-- ImagesLoaded Js -->
+    <script src="dependencies/imagesloaded/js/imagesloaded.pkgd.min.js"></script>
+    <!-- Isotope Js -->
+    <script src="dependencies/isotope-layout/js/isotope.pkgd.min.js"></script>
+    <!-- Animated Headline Js -->
+    <script src="dependencies/jquery-animated-headlines/js/jquery.animatedheadline.min.js"></script>
+    <!-- Magnific Popup Js -->
+    <script src="dependencies/magnific-popup/js/jquery.magnific-popup.min.js"></script>
+    <!-- ElevateZoom Js -->
+    <script src="dependencies/elevatezoom/js/jquery.elevateZoom-2.2.3.min.js"></script>
+    <!-- Bootstrap Validate Js -->
+    <script src="dependencies/bootstrap-validator/js/validator.min.js"></script>
+    <!-- Meanmenu Js -->
+    <script src="dependencies/meanmenu/js/jquery.meanmenu.min.js"></script>
+    <!-- Site Scripts -->
+    <script src="assets/js/app.js"></script>
+
+    <script th:src="@{js/vue.js}" type="text/javascript"></script>
+    <script src="js/echarts.js" type="text/javascript"></script>
+    <script src="js/china.js" type="text/javascript"></script>
+
+    <script>
+        let vue2=new Vue({
+            el:"#header2",
+            data:{
+                areaSelected:"",
+                yearSelected:"",
+                areaType:[
+                    {name:'西藏',value:'西藏自治区'},
+                    {name:'青海',value:'青海省'},
+                    {name:'宁夏',value:'宁夏回族自治区'},
+                    {name:'海南',value:'海南省'},
+                    {name:'甘肃',value:'甘肃省'},
+                    {name:'贵州',value:'贵州省'},
+                    {name:'新疆',value:'新疆维吾尔自治区'},
+                    {name:'云南',value:'云南省'},
+                    {name:'重庆',value:'重庆市'},
+                    {name:'吉林',value:'吉林省'},
+                    {name:'山西',value:'山西省'},
+                    {name:'天津',value:'天津市'},
+                    {name:'江西',value:'江西省'},
+                    {name:'广西',value:'广西壮族自治区'},
+                    {name:'陕西',value:'陕西省'},
+                    {name:'黑龙江',value:'黑龙江省'},
+                    {name:'内蒙古',value:'内蒙古自治区'},
+                    {name:'安徽',value:'安徽省'},
+                    {name:'北京',value:'北京市'},
+                    {name:'福建',value:'福建省'},
+                    {name:'上海',value:'上海市'},
+                    {name:'湖北',value:'湖北省'},
+                    {name:'湖南',value:'湖南省'},
+                    {name:'四川',value:'四川省'},
+                    {name:'辽宁',value:'辽宁省'},
+                    {name:'河北',value:'河北省'},
+                    {name:'河南',value:'河南省'},
+                    {name:'浙江',value:'浙江省'},
+                    {name:'山东',value:'山东省'},
+                    {name:'江苏',value:'江苏省'},
+                    {name:'广东',value:'广东省'}
+                ],
+                yearSeries:[
+                    {name:"2010",value:"y2010"},
+                    {name:"2011",value:"y2011"},
+                    {name:"2012",value:"y2012"},
+                    {name:"2013",value:"y2013"},
+                    {name:"2014",value:"y2014"},
+                    {name:"2015",value:"y2015"},
+                    {name:"2016",value:"y2016"},
+                    {name:"2017",value:"y2017"},
+                    {name:"2018",value:"y2018"},
+                    {name:"2019",value:"y2019"}
+                ],
+            },
+            created(){
+                this.yearSelected=this.yearSeries[this.yearSeries.length-1].value;
+                this.areaSelected=this.areaType[21].value;
+            },
+            methods:{
+            }
+        })
+
+    </script>
+
+    <script>
+        let vue3=new Vue({
+            el:"#header3",
+            data:{
+                areaSelected1:"",
+                areaSelected2:"",
+                yearSelected:"",
+                areaType:[
+                    {name:'西藏',value:'西藏自治区'},
+                    {name:'青海',value:'青海省'},
+                    {name:'宁夏',value:'宁夏回族自治区'},
+                    {name:'海南',value:'海南省'},
+                    {name:'甘肃',value:'甘肃省'},
+                    {name:'贵州',value:'贵州省'},
+                    {name:'新疆',value:'新疆维吾尔自治区'},
+                    {name:'云南',value:'云南省'},
+                    {name:'重庆',value:'重庆市'},
+                    {name:'吉林',value:'吉林省'},
+                    {name:'山西',value:'山西省'},
+                    {name:'天津',value:'天津市'},
+                    {name:'江西',value:'江西省'},
+                    {name:'广西',value:'广西壮族自治区'},
+                    {name:'陕西',value:'陕西省'},
+                    {name:'黑龙江',value:'黑龙江省'},
+                    {name:'内蒙古',value:'内蒙古自治区'},
+                    {name:'安徽',value:'安徽省'},
+                    {name:'北京',value:'北京市'},
+                    {name:'福建',value:'福建省'},
+                    {name:'上海',value:'上海市'},
+                    {name:'湖北',value:'湖北省'},
+                    {name:'湖南',value:'湖南省'},
+                    {name:'四川',value:'四川省'},
+                    {name:'辽宁',value:'辽宁省'},
+                    {name:'河北',value:'河北省'},
+                    {name:'河南',value:'河南省'},
+                    {name:'浙江',value:'浙江省'},
+                    {name:'山东',value:'山东省'},
+                    {name:'江苏',value:'江苏省'},
+                    {name:'广东',value:'广东省'}
+                ],
+                yearSeries:[
+                    {name:"2010",value:"y2010"},
+                    {name:"2011",value:"y2011"},
+                    {name:"2012",value:"y2012"},
+                    {name:"2013",value:"y2013"},
+                    {name:"2014",value:"y2014"},
+                    {name:"2015",value:"y2015"},
+                    {name:"2016",value:"y2016"},
+                    {name:"2017",value:"y2017"},
+                    {name:"2018",value:"y2018"},
+                    {name:"2019",value:"y2019"}
+                ],
+            },
+            created(){
+                this.yearSelected=this.yearSeries[this.yearSeries.length-1].value;
+                this.areaSelected1=this.areaType[21].value;
+                this.areaSelected2=this.areaType[30].value;
+
+            },
+            methods:{
+            }
+        })
+
+    </script>
+
+    <script type="text/javascript" th:inline="javascript">
+        let values=[[${values}]];
+        let indicatorValues=[[${indicatorValues}]];
+
+        let chart1=echarts.init(document.getElementById('map'));
+        let option1={
+            title: {
+                text: '湖北'+'2019年'
+            },
+            tooltip: {},
+            legend: {
+                data: "湖北省"
+            },
+            radar: {
+                // shape: 'circle',
+                name: {
+                    textStyle: {
+                        color: '#fff',
+                        backgroundColor: '#999',
+                        borderRadius: 3,
+                        padding: [3, 5]
+                    }
+                },
+                indicator: indicatorValues
+            },
+            series: [{
+                type: 'radar',
+                // areaStyle: {normal: {}},
+                data: [
+                    {
+                        value: values,
+                        name: '湖北省'
+                    }
+                ]
+            }]
+        };
+        chart1.setOption(option1);
+
+        function submit2() {
+            let areaSelected=vue2.$data.areaSelected;
+            let yearSelected=vue2.$data.yearSelected;
+            $.ajax({
+                type: "GET",
+                url:"/getDataIndex",
+                data:"yearSelected="+yearSelected+"&areaSelected="+areaSelected,
+                datatype: "json",
+                success:function (result) {
+                    if(result){
+                        chart1.setOption({
+                            title: {
+                                text: result[2]
+                            },
+                            legend: {
+                                data: result[2]
+                            },
+                            radar: {
+                                indicator: result[1]
+                            },
+                            series: [{
+                                data: [
+                                    {
+                                        value: result[0],
+                                        name: result[2]
+                                    }
+                                ]
+                            }]
+                        });
+                        $(function () {
+                            $("#table1").empty();
+                            let html="";
+                            html+="<thead>";
+                            html+=      "<tr>";
+                            html+=          "<td>"+"指标"+"</td>";
+                            html+=          "<td>"+result[2]+"</td>";
+                            html+=          "<td>"+"最大"+"</td>";
+                            html+=      "</tr>";
+                            html+="</thead>";
+                            html+="<tbody>";
+                            for(let i=0;i<result[0].length;i++){
+                                html+="<tr>";
+                                html+=    "<td>"+result[1][i].name+"</td>";
+                                html+=    "<td>"+result[0][i]+"</td>";
+                                html+=    "<td>"+result[1][i].max+"</td>";
+                                html+="</tr>";
+                            }
+                            html+="</tbody>";
+                            $("#table1").html(html);
+
+                        });
+
+                        console.log(result);
+                    }
+
+                }
+            });
+        }
+    </script>
+
+    <script type="text/javascript" th:inline="javascript">
+
+        let values1=[[${values1}]];
+
+        let chart2=echarts.init(document.getElementById('radio2'));
+        let option2={
+            title: {
+                text: '湖北'+'VS'+'广东'
+            },
+            tooltip: {},
+            legend: {
+                data: ['湖北省','广东省']
+            },
+            radar: {
+                // shape: 'circle',
+                name: {
+                    textStyle: {
+                        color: '#fff',
+                        backgroundColor: '#999',
+                        borderRadius: 3,
+                        padding: [3, 5]
+                    }
+                },
+                indicator: indicatorValues
+            },
+            series: [{
+                type: 'radar',
+                // areaStyle: {normal: {}},
+                data: [
+                    {
+                        value: values,
+                        name: '湖北省'
+                    },
+                    {
+                        value: values1,
+                        name: '广东省'
+                    }
+                ]
+            }]
+        };
+        chart2.setOption(option2);
+
+        function submit3() {
+            let areaSelected1=vue3.$data.areaSelected1;
+            let areaSelected2=vue3.$data.areaSelected2;
+
+            let yearSelected=vue3.$data.yearSelected;
+            $.ajax({
+                type: "GET",
+                url:"/getDataIndex3",
+                data:"yearSelected="+yearSelected+"&areaSelected1="+areaSelected1+"&areaSelected2="+areaSelected2,
+                datatype: "json",
+                success:function (result) {
+                    if(result){
+                        chart2.setOption({
+                            title: {
+                                text: result[3][0]+'VS'+result[3][1]
+                            },
+                            legend: {
+                                data: result[3]
+                            },
+                            radar: {
+                                indicator: result[2]
+                            },
+                            series: [{
+                                data: [
+                                    {
+                                        value: result[0],
+                                        name: result[3][0]
+                                    },
+                                    {
+                                        value: result[1],
+                                        name: result[3][1]
+                                    }
+                                ]
+                            }]
+                        });
+                        $(function () {
+                            $("#table2").empty();
+                            let html="";
+                            html+="<thead>";
+                            html+=      "<tr>";
+                            html+=          "<td>"+"指标"+"</td>";
+                            html+=          "<td>"+result[3][0]+"</td>";
+                            html+=          "<td>"+result[3][1]+"</td>";
+                            html+=          "<td>"+"最大"+"</td>";
+                            html+=      "</tr>";
+                            html+="</thead>";
+                            html+="<tbody>";
+                            for(let i=0;i<result[0].length;i++){
+                                html+="<tr>";
+                                html+=    "<td>"+result[2][i].name+"</td>";
+                                html+=    "<td>"+result[0][i]+"</td>";
+                                html+=    "<td>"+result[1][i]+"</td>";
+                                html+=    "<td>"+result[2][i].max+"</td>";
+                                html+="</tr>";
+                            }
+                            html+="</tbody>";
+                            $("#table2").html(html);
+
+                        });
+                        console.log(result);
+                    }
+
+                }
+            });
+        }
+    </script>
+
+    <script type="text/javascript" th:inline="javascript">
+        $(function () {
+            let html="";
+            html+="<thead>";
+            html+=      "<tr>";
+            html+=          "<td>"+"指标"+"</td>";
+            html+=          "<td>"+"湖北"+"</td>";
+            html+=          "<td>"+"最大"+"</td>";
+            html+=      "</tr>";
+            html+="</thead>";
+            html+="<tbody>";
+            for(let i=0;i<values.length;i++){
+                html+="<tr>";
+                html+=    "<td>"+indicatorValues[i].name+"</td>";
+                html+=    "<td>"+values[i]+"</td>";
+                html+=    "<td>"+indicatorValues[i].max+"</td>";
+                html+="</tr>";
+            }
+            html+="</tbody>";
+            $("#table1").html(html);
+
+        });
+
+        $(function () {
+            let html="";
+            html+="<thead>";
+            html+=      "<tr>";
+            html+=          "<td>"+"指标"+"</td>";
+            html+=          "<td>"+"湖北"+"</td>";
+            html+=          "<td>"+"广东"+"</td>";
+            html+=          "<td>"+"最大"+"</td>";
+            html+=      "</tr>";
+            html+="</thead>";
+            html+="<tbody>";
+            for(let i=0;i<values.length;i++){
+                html+="<tr>";
+                html+=    "<td>"+indicatorValues[i].name+"</td>";
+                html+=    "<td>"+values[i]+"</td>";
+                html+=    "<td>"+values1[i]+"</td>";
+                html+=    "<td>"+indicatorValues[i].max+"</td>";
+                html+="</tr>";
+            }
+            html+="</tbody>";
+            $("#table2").html(html);
+
+        });
+
+
+    </script>
+
+
+
+</body>
+
+</html>
