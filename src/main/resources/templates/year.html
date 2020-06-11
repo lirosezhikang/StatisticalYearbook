@@ -722,6 +722,26 @@
     };
     chart2.setOption(option2);
 
+    $(function () {
+        let html="";
+        html+="<thead>";
+        html+=      "<tr>";
+        html+=          "<td>"+"年份"+"</td>";
+        html+=          "<td>"+"数据"+"</td>";
+        html+=      "</tr>";
+        html+="</thead>";
+        html+="<tbody>";
+        for(let i=0;i<year.length;i++){
+            html+="<tr>";
+            html+=    "<td>"+year[i]+"</td>";
+            html+=    "<td>"+data1[i]+"</td>";
+            html+="</tr>";
+        }
+        html+="</tbody>";
+        $("#table1").html(html);
+
+    });
+
     function submit2() {
         let areaSelected=vue2.$data.areaSelected;
         let dataSelected=vue2.$data.dataSelected;
@@ -750,6 +770,28 @@
                             data:result[1]
                         }]
                     });
+
+                    $(function () {
+                        $("#table1").empty();
+                        let html="";
+                        html+="<thead>";
+                        html+=      "<tr>";
+                        html+=          "<td>"+"年份"+"</td>";
+                        html+=          "<td>"+"数据"+"</td>";
+                        html+=      "</tr>";
+                        html+="</thead>";
+                        html+="<tbody>";
+                        for(let i=0;i<year.length;i++){
+                            html+="<tr>";
+                            html+=    "<td>"+year[i]+"</td>";
+                            html+=    "<td>"+data1[i]+"</td>";
+                            html+="</tr>";
+                        }
+                        html+="</tbody>";
+                        $("#table1").html(html);
+
+                    });
+
                     console.log(result);
                 }
 
@@ -852,6 +894,29 @@
     };
     chart4.setOption(option4);
 
+    $(function () {
+        $("#table2").empty();
+        let html="";
+        html+="<thead>";
+        html+=      "<tr>";
+        html+=          "<td>"+"年份"+"</td>";
+        html+=          "<td>"+"湖北"+"</td>";
+        html+=          "<td>"+"广东"+"</td>";
+        html+=      "</tr>";
+        html+="</thead>";
+        html+="<tbody>";
+        for(let i=0;i<year.length;i++){
+            html+="<tr>";
+            html+=    "<td>"+year[i]+"</td>";
+            html+=    "<td>"+data2[i]+"</td>";
+            html+=    "<td>"+data1[i]+"</td>";
+            html+="</tr>";
+        }
+        html+="</tbody>";
+        $("#table2").html(html);
+
+    });
+
     function submit3() {
         let areaSelected1=vue3.$data.areaSelected1;
         let areaSelected2=vue3.$data.areaSelected2;
@@ -908,6 +973,29 @@
                                 data: result[2]
                             }
                         ]
+                    });
+
+                    $(function () {
+                        $("#table2").empty();
+                        let html="";
+                        html+="<thead>";
+                        html+=      "<tr>";
+                        html+=          "<td>"+"年份"+"</td>";
+                        html+=          "<td>"+result[4]+"</td>";
+                        html+=          "<td>"+result[5]+"</td>";
+                        html+=      "</tr>";
+                        html+="</thead>";
+                        html+="<tbody>";
+                        for(let i=0;i<result[0].length;i++){
+                            html+="<tr>";
+                            html+=    "<td>"+result[0][i]+"</td>";
+                            html+=    "<td>"+result[1][i]+"</td>";
+                            html+=    "<td>"+result[2][i]+"</td>";
+                            html+="</tr>";
+                        }
+                        html+="</tbody>";
+                        $("#table2").html(html);
+
                     });
                     console.log(result);
                 }

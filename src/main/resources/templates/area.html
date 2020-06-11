@@ -670,14 +670,14 @@
         data:"dataSelected="+dataSelected+"&yearSelected="+yearSelected,
         datatype: "json",
         success:function (result) {
-            if(result){
+            if(result[0]){
                 let name1=[];
-                for(let i=0;i<result.length;i++){
-                    name1[i]=result[i].name;
+                for(let i=0;i<result[0].length;i++){
+                    name1[i]=result[0][i].name;
                 }
                 chart1.setOption({
                     series:[{
-                        data:result
+                        data:result[0]
                     }]
                 });
                 chart2.setOption({
@@ -686,9 +686,29 @@
                     },
                     series:[{
                         type:'bar',
-                        data:result
+                        data:result[0]
                     }]
                 });
+
+                $(function () {
+                    let html="";
+                    html+="<thead>";
+                    html+=      "<tr>";
+                    html+=          "<td>"+"地区"+"</td>";
+                    html+=          "<td>"+"数据"+"</td>";
+                    html+=      "</tr>";
+                    html+="</thead>";
+                    html+="<tbody>";
+                    for(let i=0;i<result[0].length;i++){
+                        html+="<tr>";
+                        html+=    "<td>"+result[0][i].name+"</td>";
+                        html+=    "<td>"+result[0][i].value+"</td>";
+                        html+="</tr>";
+                    }
+                    html+="</tbody>";
+                    $("#table1").html(html);
+                });
+
                 console.log(name1);
                 console.log(result);
             }
@@ -702,10 +722,10 @@
         data:"dataSelected="+dataSelected+"&yearSelected="+yearSelected,
         datatype: "json",
         success:function (result) {
-            if(result){
+            if(result[0]){
                 let name1=[];
-                for(let i=0;i<result.length;i++){
-                    name1[i]=result[i].name;
+                for(let i=0;i<result[0].length;i++){
+                    name1[i]=result[0][i].name;
                 }
                 chart3.setOption({
                     yAxis:{
@@ -713,7 +733,7 @@
                     },
                     series:[{
                         type:'bar',
-                        data:result
+                        data:result[0]
                     }]
                 });
                 chart4.setOption({
@@ -721,7 +741,7 @@
                         data:name1
                     },
                     series:[{
-                        data:result
+                        data:result[0]
                     }]
                 })
                 console.log(result);
@@ -742,22 +762,61 @@
             success:function (result) {
                 if(result){
                     let name1=[];
-                    for(let i=0;i<result.length;i++){
-                        name1[i]=result[i].name;
+                    for(let i=0;i<result[0].length;i++){
+                        name1[i]=result[0][i].name;
                     }
                     chart1.setOption({
+                        title:{
+                          text:result[3]
+                        },
+                        tooltip:{
+                            trigger:'item',
+                            formatter:'{b}<br/>{c}'+result[4]
+                        },
+                        visualMap:{
+                            max:result[1].data,
+                            min:result[2].data
+                        },
                         series:[{
-                            data:result
+                            name:result[3],
+                            data:result[0]
                         }]
                     });
                     chart2.setOption({
+                        title:{
+                            text:result[3]
+                        },
+                        tooltip:{
+                            trigger:'item',
+                            formatter:'{b}<br/>{c}'+result[4]
+                        },
                         xAxis:{
                             data:name1
                         },
                         series:[{
                             type:'bar',
-                            data:result
+                            data:result[0]
                         }]
+                    });
+
+                    $(function () {
+                        $("#table1").empty();
+                        let html="";
+                        html+="<thead>";
+                        html+=      "<tr>";
+                        html+=          "<td>"+"地区"+"</td>";
+                        html+=          "<td>"+"数据"+"</td>";
+                        html+=      "</tr>";
+                        html+="</thead>";
+                        html+="<tbody>";
+                        for(let i=0;i<result[0].length;i++){
+                            html+="<tr>";
+                            html+=    "<td>"+result[0][i].name+"</td>";
+                            html+=    "<td>"+result[0][i].value+"</td>";
+                            html+="</tr>";
+                        }
+                        html+="</tbody>";
+                        $("#table1").html(html);
                     });
                     console.log(name1);
                     console.log(result);
@@ -774,26 +833,40 @@
             success:function (result) {
                 if(result){
                     let name1=[];
-                    for(let i=0;i<result.length;i++){
-                        name1[i]=result[i].name;
+                    for(let i=0;i<result[0].length;i++){
+                        name1[i]=result[0][i].name;
                     }
                     chart3.setOption({
+                        title:{
+                            text:result[1]
+                        },
+                        tooltip:{
+                            trigger:'item',
+                            formatter:'{b}<br/>{c}'+result[2]
+                        },
                         yAxis:{
                             data:name1
                         },
                         series:[{
                             type:'bar',
-                            data:result
+                            data:result[0]
                         }]
                     });
                     chart4.setOption({
+                        title:{
+                            text:result[1]
+                        },
+                        tooltip:{
+                            trigger:'item',
+                            formatter:'{b}<br/>{c}'+result[2]
+                        },
                         legend:{
                             data:name1
                         },
                         series:[{
-                            data:result
+                            data:result[0]
                         }]
-                    })
+                    });
                     console.log(result);
                 }
 
@@ -820,16 +893,6 @@
                 {name:"高校数",value:"total_school"},
                 {name:"教育经费",value:"edu_fee"}
             ],
-            // yearset:{
-            //     "地区生产总值":["2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"],
-            //     "人口":["2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"],
-            //     "人均生产总值":["2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"],
-            //     "人均工资":["2010","2011","2012","2013","2014","2015","2016","2017","2018"],
-            //     "人均可支配收入":["2013","2014","2015","2016","2017","2018","2019"],
-            //     "人均消费支出":["2010","2011","2012","2013","2014","2015","2016"],
-            //     "高校数":["2010","2011","2012","2013","2014","2015","2016","2017","2018"],
-            //     "教育经费":["2013","2014","2015","2016","2017"],
-            // },
             yearSeries:[
                 {name:"2010",value:"y2010"},
                 {name:"2011",value:"y2011"},
@@ -851,6 +914,7 @@
         }
     })
 </script>
+
 
 </body>
 
