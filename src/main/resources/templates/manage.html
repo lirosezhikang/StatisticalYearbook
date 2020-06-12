@@ -204,79 +204,79 @@
                                                     <table class="table table-bordered table-hover" id="table">
                                                         <thead>
                                                         <tr>
-                                                            <td>操作</td>
-                                                            <td>年份</td>
-                                                            <td>北京</td>
-                                                            <td>天津</td>
-                                                            <td>河北</td>
-                                                            <td>山西</td>
-                                                            <td>内蒙</td>
-                                                            <td>辽宁</td>
-                                                            <td>吉林</td>
-                                                            <td>黑龙江</td>
-                                                            <td>上海</td>
-                                                            <td>江苏</td>
-                                                            <td>浙江</td>
-                                                            <td>安徽</td>
-                                                            <td>福建</td>
-                                                            <td>江西</td>
-                                                            <td>山东</td>
-                                                            <td>河南</td>
-                                                            <td>湖北</td>
-                                                            <td>湖南</td>
-                                                            <td>广东</td>
-                                                            <td>广西</td>
-                                                            <td>海南</td>
-                                                            <td>重庆</td>
-                                                            <td>四川</td>
-                                                            <td>贵州</td>
-                                                            <td>云南</td>
-                                                            <td>西藏</td>
-                                                            <td>陕西</td>
-                                                            <td>甘肃</td>
-                                                            <td>青海</td>
-                                                            <td>宁夏</td>
-                                                            <td>新疆</td>
+                                                            <th>操作</th>
+                                                            <th>年份</th>
+                                                            <th>北京</th>
+                                                            <th>天津</th>
+                                                            <th>河北</th>
+                                                            <th>山西</th>
+                                                            <th>内蒙</th>
+                                                            <th>辽宁</th>
+                                                            <th>吉林</th>
+                                                            <th>黑龙江</th>
+                                                            <th>上海</th>
+                                                            <th>江苏</th>
+                                                            <th>浙江</th>
+                                                            <th>安徽</th>
+                                                            <th>福建</th>
+                                                            <th>江西</th>
+                                                            <th>山东</th>
+                                                            <th>河南</th>
+                                                            <th>湖北</th>
+                                                            <th>湖南</th>
+                                                            <th>广东</th>
+                                                            <th>广西</th>
+                                                            <th>海南</th>
+                                                            <th>重庆</th>
+                                                            <th>四川</th>
+                                                            <th>贵州</th>
+                                                            <th>云南</th>
+                                                            <th>西藏</th>
+                                                            <th>陕西</th>
+                                                            <th>甘肃</th>
+                                                            <th>青海</th>
+                                                            <th>宁夏</th>
+                                                            <th>新疆</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody id="tbody">
                                                         <tr th:each="item : ${result}">
-                                                            <td style="white-space: nowrap">
+                                                            <th style="white-space: nowrap">
                                                                 <button onclick="deletetr(this)">删除</button>
                                                                 <button onclick="savetr(this)">保存</button>
-                                                            </td>
-                                                            <td th:text="${item.year}"></td>
-                                                            <td th:text="${item.beijing}"></td>
-                                                            <td th:text="${item.tianjing}"></td>
-                                                            <td th:text="${item.hebei}"></td>
-                                                            <td th:text="${item.shanxi}"></td>
-                                                            <td th:text="${item.neimeng}"></td>
-                                                            <td th:text="${item.liaoning}"></td>
-                                                            <td th:text="${item.jilin}"></td>
-                                                            <td th:text="${item.heilongjiang}"></td>
-                                                            <td th:text="${item.shanghai}"></td>
-                                                            <td th:text="${item.jiangsu}"></td>
-                                                            <td th:text="${item.zhejiang}"></td>
-                                                            <td th:text="${item.anhui}"></td>
-                                                            <td th:text="${item.fujian}"></td>
-                                                            <td th:text="${item.jiangxi}"></td>
-                                                            <td th:text="${item.shandong}"></td>
-                                                            <td th:text="${item.henan}"></td>
-                                                            <td th:text="${item.hubei}"></td>
-                                                            <td th:text="${item.hunan}"></td>
-                                                            <td th:text="${item.guangdong}"></td>
-                                                            <td th:text="${item.guangxi}"></td>
-                                                            <td th:text="${item.hainan}"></td>
-                                                            <td th:text="${item.chongqin}"></td>
-                                                            <td th:text="${item.sichuan}"></td>
-                                                            <td th:text="${item.guizhou}"></td>
-                                                            <td th:text="${item.yunnan}"></td>
-                                                            <td th:text="${item.xizang}"></td>
-                                                            <td th:text="${item.shaanxi}"></td>
-                                                            <td th:text="${item.gansu}"></td>
-                                                            <td th:text="${item.qinhai}"></td>
-                                                            <td th:text="${item.ningxia}"></td>
-                                                            <td th:text="${item.xinjiang}"></td>
+                                                            </th>
+                                                            <td class="year" th:text="${item.year}"></td>
+                                                            <td class="beijing" th:text="${item.beijing}"></td>
+                                                            <td class="tianjing" th:text="${item.tianjing}"></td>
+                                                            <td class="hebei" th:text="${item.hebei}"></td>
+                                                            <td class="shanxi" th:text="${item.shanxi}"></td>
+                                                            <td class="neimeng" th:text="${item.neimeng}"></td>
+                                                            <td class="liaoning" th:text="${item.liaoning}"></td>
+                                                            <td class="jilin" th:text="${item.jilin}"></td>
+                                                            <td class="heilongjiang" th:text="${item.heilongjiang}"></td>
+                                                            <td class="shanghai" th:text="${item.shanghai}"></td>
+                                                            <td class="jiangsu" th:text="${item.jiangsu}"></td>
+                                                            <td class="zhejiang" th:text="${item.zhejiang}"></td>
+                                                            <td class="anhui" th:text="${item.anhui}"></td>
+                                                            <td class="fujian" th:text="${item.fujian}"></td>
+                                                            <td class="jiangxi" th:text="${item.jiangxi}"></td>
+                                                            <td class="shandong" th:text="${item.shandong}"></td>
+                                                            <td class="henan" th:text="${item.henan}"></td>
+                                                            <td class="hubei" th:text="${item.hubei}"></td>
+                                                            <td class="hunan" th:text="${item.hunan}"></td>
+                                                            <td class="guangdong" th:text="${item.guangdong}"></td>
+                                                            <td class="guangxi" th:text="${item.guangxi}"></td>
+                                                            <td class="hainan" th:text="${item.hainan}"></td>
+                                                            <td class="chongqin" th:text="${item.chongqin}"></td>
+                                                            <td class="sichuan" th:text="${item.sichuan}"></td>
+                                                            <td class="guizhou" th:text="${item.guizhou}"></td>
+                                                            <td class="yunnan" th:text="${item.yunnan}"></td>
+                                                            <td class="xizang" th:text="${item.xizang}"></td>
+                                                            <td class="shaanxi" th:text="${item.shaanxi}"></td>
+                                                            <td class="gansu" th:text="${item.gansu}"></td>
+                                                            <td class="qinhai" th:text="${item.qinhai}"></td>
+                                                            <td class="ningxia" th:text="${item.ningxia}"></td>
+                                                            <td class="xinjiang" th:text="${item.xinjiang}"></td>
                                                         </tr>
 
                                                         </tbody>
@@ -508,53 +508,43 @@
                     let str="";
                     for(let i=0;i<result.length;i++){
                         str+="<tr>";
-                        str+=   "<td style=\"white-space: nowrap\"><button onclick=\"deletetr(this)\">删除</button><button onclick=\"savetr(this)\">保存</button></td>"
-                        str+=   "<td>"+result[i].year+"</td>";
-                        str+=   "<td>"+result[i].beijing+"</td>";
-                        str+=   "<td>"+result[i].tianjing+"</td>";
-                        str+=   "<td>"+result[i].hebei+"</td>";
-                        str+=   "<td>"+result[i].shanxi+"</td>";
-                        str+=   "<td>"+result[i].neimeng+"</td>";
-                        str+=   "<td>"+result[i].liaoning+"</td>";
-                        str+=   "<td>"+result[i].jilin+"</td>";
-                        str+=   "<td>"+result[i].heilongjiang+"</td>";
-                        str+=   "<td>"+result[i].shanghai+"</td>";
-                        str+=   "<td>"+result[i].jiangsu+"</td>";
-                        str+=   "<td>"+result[i].zhejiang+"</td>";
-                        str+=   "<td>"+result[i].anhui+"</td>";
-                        str+=   "<td>"+result[i].fujian+"</td>";
-                        str+=   "<td>"+result[i].jiangxi+"</td>";
-                        str+=   "<td>"+result[i].shandong+"</td>";
-                        str+=   "<td>"+result[i].henan+"</td>";
-                        str+=   "<td>"+result[i].hubei+"</td>";
-                        str+=   "<td>"+result[i].hunan+"</td>";
-                        str+=   "<td>"+result[i].guangdong+"</td>";
-                        str+=   "<td>"+result[i].guangxi+"</td>";
-                        str+=   "<td>"+result[i].hainan+"</td>";
-                        str+=   "<td>"+result[i].chongqin+"</td>";
-                        str+=   "<td>"+result[i].sichuan+"</td>";
-                        str+=   "<td>"+result[i].guizhou+"</td>";
-                        str+=   "<td>"+result[i].yunnan+"</td>";
-                        str+=   "<td>"+result[i].xizang+"</td>";
-                        str+=   "<td>"+result[i].shaanxi+"</td>";
-                        str+=   "<td>"+result[i].gansu+"</td>";
-                        str+=   "<td>"+result[i].qinhai+"</td>";
-                        str+=   "<td>"+result[i].ningxia+"</td>";
-                        str+=   "<td>"+result[i].xinjiang+"</td>";
+                        str+=   "<th style=\"white-space: nowrap\"><button onclick=\"deletetr(this)\">删除</button><button onclick=\"savetr(this)\">保存</button></th>"
+                        str+=   "<td class='year'>"+result[i].year+"</td>";
+                        str+=   "<td class='beijing'>"+result[i].beijing+"</td>";
+                        str+=   "<td class='tianjing'>"+result[i].tianjing+"</td>";
+                        str+=   "<td class='hebei'>"+result[i].hebei+"</td>";
+                        str+=   "<td class='shanxi'>"+result[i].shanxi+"</td>";
+                        str+=   "<td class='neimeng'>"+result[i].neimeng+"</td>";
+                        str+=   "<td class='liaoning'>"+result[i].liaoning+"</td>";
+                        str+=   "<td class='jilin'>"+result[i].jilin+"</td>";
+                        str+=   "<td class='heilongjiang'>"+result[i].heilongjiang+"</td>";
+                        str+=   "<td class='shanghai'>"+result[i].shanghai+"</td>";
+                        str+=   "<td class='jiangsu'>"+result[i].jiangsu+"</td>";
+                        str+=   "<td class='zhejiang'>"+result[i].zhejiang+"</td>";
+                        str+=   "<td class='anhui'>"+result[i].anhui+"</td>";
+                        str+=   "<td class='fujian'>"+result[i].fujian+"</td>";
+                        str+=   "<td class='jiangxi'>"+result[i].jiangxi+"</td>";
+                        str+=   "<td class='shandong'>"+result[i].shandong+"</td>";
+                        str+=   "<td class='henan'>"+result[i].henan+"</td>";
+                        str+=   "<td class='hubei'>"+result[i].hubei+"</td>";
+                        str+=   "<td class='hunan'>"+result[i].hunan+"</td>";
+                        str+=   "<td class='guangdong'>"+result[i].guangdong+"</td>";
+                        str+=   "<td class='guangxi'>"+result[i].guangxi+"</td>";
+                        str+=   "<td class='hainan'>"+result[i].hainan+"</td>";
+                        str+=   "<td class='chongqin'>"+result[i].chongqin+"</td>";
+                        str+=   "<td class='sichuan'>"+result[i].sichuan+"</td>";
+                        str+=   "<td class='guizhou'>"+result[i].guizhou+"</td>";
+                        str+=   "<td class='yunnan'>"+result[i].yunnan+"</td>";
+                        str+=   "<td class='xizang'>"+result[i].xizang+"</td>";
+                        str+=   "<td class='shaanxi'>"+result[i].shaanxi+"</td>";
+                        str+=   "<td class='gansu'>"+result[i].gansu+"</td>";
+                        str+=   "<td class='qinhai'>"+result[i].qinhai+"</td>";
+                        str+=   "<td class='ningxia'>"+result[i].ningxia+"</td>";
+                        str+=   "<td class='xinjiang'>"+result[i].xinjiang+"</td>";
                         str+="</tr>";
                     }
                     $("#tbody").html(str);
-                    $('table td').dblclick(function(){
-                        if(!$(this).is('.input')){
-                            $(this).addClass('input').html('<input type="text" value="'+ $(this).text() +'" />').find('input').focus().blur(function(){
-                                $(this).parent().removeClass('input').html($(this).val() || 0);
-                            });
-                        }
-                    }).hover(function(){
-                        $(this).addClass('hover');
-                    },function(){
-                        $(this).removeClass('hover');
-                    });
+                    addInput();
                     console.log(result);
                 }
             }
@@ -563,30 +553,175 @@
 
     function addRow() {
         let str="<tr>";
-        str+=   "<td style=\"white-space: nowrap\"><button onclick=\"deletetr(this)\">删除</button><button onclick=\"savetr(this)\">保存</button></td>"
-        for(let i=0;i<32;i++){
-            str+="<td><input type='text'></td>"
-        }
+        str+=   "<th style=\"white-space: nowrap\"><button onclick=\"deletetr(this)\">删除</button><button onclick=\"savetr(this)\">保存</button></th>";
+        str+=   "<td class='year'></td>";
+        str+=   "<td class='beijing'></td>";
+        str+=   "<td class='tianjing'></td>";
+        str+=   "<td class='hebei'></td>";
+        str+=   "<td class='shanxi'></td>";
+        str+=   "<td class='neimeng'></td>";
+        str+=   "<td class='liaoning'></td>";
+        str+=   "<td class='jilin'></td>";
+        str+=   "<td class='heilongjiang'></td>";
+        str+=   "<td class='shanghai'></td>";
+        str+=   "<td class='jiangsu'></td>";
+        str+=   "<td class='zhejiang'></td>";
+        str+=   "<td class='anhui'></td>";
+        str+=   "<td class='fujian'></td>";
+        str+=   "<td class='jiangxi'></td>";
+        str+=   "<td class='shandong'></td>";
+        str+=   "<td class='henan'></td>";
+        str+=   "<td class='hubei'></td>";
+        str+=   "<td class='hunan'></td>";
+        str+=   "<td class='guangdong'></td>";
+        str+=   "<td class='guangxi'></td>";
+        str+=   "<td class='hainan'></td>";
+        str+=   "<td class='chongqin'></td>";
+        str+=   "<td class='sichuan'></td>";
+        str+=   "<td class='guizhou'></td>";
+        str+=   "<td class='yunnan'></td>";
+        str+=   "<td class='xizang'></td>";
+        str+=   "<td class='shaanxi'></td>";
+        str+=   "<td class='gansu'></td>";
+        str+=   "<td class='qinhai'></td>";
+        str+=   "<td class='ningxia'></td>";
+        str+=   "<td class='xinjiang'></td>";
         str+="</tr>";
         $("#tbody").append(str);
 
+        addInput();
     }
 
-    function deletetr(nowtr) {
-        $(nowtr).parent().parent().remove();
+    function deletetr(nowBtn) {
+        let tableName=vue1.$data.tableSelected;
+        let year=$(nowBtn).parents("tr").find(".year").text();
+        $.ajax({
+            type: "GET",
+            url: "/delete",
+            traditional: true,
+            data: {
+                tableName: tableName,
+                year: year
+            },
+            //解决ajax中文乱码
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if(data==1){
+                    alert("success");
+                }
+            },
+            error: function (xhr, status, errMsg) {
+                //执行Servlet失败执行下面数据
+                alert("error");
+            }
+        });
+
+        $(nowBtn).parent().parent().remove();
     }
 
-    $('table td').dblclick(function(){
-        if(!$(this).is('.input')){
-            $(this).addClass('input').html('<input type="text" value="'+ $(this).text() +'" />').find('input').focus().blur(function(){
-                $(this).parent().removeClass('input').html($(this).val() || 0);
-            });
-        }
-    }).hover(function(){
-        $(this).addClass('hover');
-    },function(){
-        $(this).removeClass('hover');
-    });
+    function savetr(nowbtn){
+        let tableName=vue1.$data.tableSelected;
+
+        let year=$(nowbtn).parents("tr").find(".year").text();
+        let beijing=$(nowbtn).parents("tr").find(".beijing").text();
+        let tianjing=$(nowbtn).parents("tr").find(".tianjing").text();
+        let hebei=$(nowbtn).parents("tr").find(".hebei").text();
+        let shanxi=$(nowbtn).parents("tr").find(".shanxi").text();
+        let neimeng=$(nowbtn).parents("tr").find(".neimeng").text();
+        let liaoning=$(nowbtn).parents("tr").find(".liaoning").text();
+        let jilin=$(nowbtn).parents("tr").find(".jilin").text();
+        let heilongjiang=$(nowbtn).parents("tr").find(".heilongjiang").text();
+        let shanghai=$(nowbtn).parents("tr").find(".shanghai").text();
+        let jiangsu=$(nowbtn).parents("tr").find(".jiangsu").text();
+        let zhejiang=$(nowbtn).parents("tr").find(".zhejiang").text();
+        let anhui=$(nowbtn).parents("tr").find(".anhui").text();
+        let fujian=$(nowbtn).parents("tr").find(".fujian").text();
+        let jiangxi=$(nowbtn).parents("tr").find(".jiangxi").text();
+        let shandong=$(nowbtn).parents("tr").find(".shandong").text();
+        let henan=$(nowbtn).parents("tr").find(".henan").text();
+        let hubei=$(nowbtn).parents("tr").find(".hubei").text();
+        let hunan=$(nowbtn).parents("tr").find(".hunan").text();
+        let guangdong=$(nowbtn).parents("tr").find(".guangdong").text();
+        let guangxi=$(nowbtn).parents("tr").find(".guangxi").text();
+        let hainan=$(nowbtn).parents("tr").find(".hainan").text();
+        let chongqin=$(nowbtn).parents("tr").find(".chongqin").text();
+        let sichuan=$(nowbtn).parents("tr").find(".sichuan").text();
+        let guizhou=$(nowbtn).parents("tr").find(".guizhou").text();
+        let yunnan=$(nowbtn).parents("tr").find(".yunnan").text();
+        let xizang=$(nowbtn).parents("tr").find(".xizang").text();
+        let shaanxi=$(nowbtn).parents("tr").find(".shaanxi").text();
+        let gansu=$(nowbtn).parents("tr").find(".gansu").text();
+        let qinhai=$(nowbtn).parents("tr").find(".qinhai").text();
+        let ningxia=$(nowbtn).parents("tr").find(".ningxia").text();
+        let xinjiang=$(nowbtn).parents("tr").find(".xinjiang").text();
+
+        $.ajax({
+            type : "GET",
+            url : "/save",
+            traditional: true,
+            data : {
+                tableName:tableName,
+                year:year,
+                beijing:beijing,
+                tianjing:tianjing,
+                hebei:hebei,
+                shanxi:shanxi,
+                neimeng:neimeng,
+                liaoning:liaoning,
+                jilin:jilin,
+                heilongjiang:heilongjiang,
+                shanghai:shanghai,
+                jiangsu:jiangsu,
+                zhejiang:zhejiang,
+                anhui:anhui,
+                fujian:fujian,
+                jiangxi:jiangxi,
+                shandong:shandong,
+                henan:henan,
+                hubei:hubei,
+                hunan:hunan,
+                guangdong:guangdong,
+                guangxi:guangxi,
+                hainan:hainan,
+                chongqin:chongqin,
+                sichuan:sichuan,
+                guizhou:guizhou,
+                yunnan:yunnan,
+                xizang:xizang,
+                shaanxi:shaanxi,
+                gansu:gansu,
+                qinhai:qinhai,
+                ningxia:ningxia,
+                xinjiang:xinjiang,
+            },
+            //解决ajax中文乱码
+            contentType: "application/json; charset=utf-8",
+            success : function(data) {
+                alert("success");
+            },
+            error : function(xhr, status, errMsg) {
+                //执行Servlet失败执行下面数据
+                alert("error");
+            }
+        });
+    }
+
+    function addInput(){
+        $('table td').dblclick(function(){
+            if(!$(this).is('.input')){
+                $(this).addClass('input').html('<input type="text" value="'+ $(this).text() +'" />').find('input').focus().blur(function(){
+                    $(this).parent().removeClass('input').html($(this).val() || 0);
+                });
+            }
+        }).hover(function(){
+            $(this).addClass('hover');
+        },function(){
+            $(this).removeClass('hover');
+        });
+    }
+
+    addInput();
+
 </script>
 
 </body>
